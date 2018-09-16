@@ -1,0 +1,35 @@
+﻿@model MySite.Models.Users
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Регистраиця</h2>
+<div>
+    @using (Html.BeginForm("Registration", "Home", new { user = Model }))
+    {
+        @Html.ValidationSummary()
+        <table>
+            <tr>
+                <td>Login</td>
+                <td> @Html.TextBoxFor(x => x.Login)</td>
+            </tr>
+            <tr>
+                <td>Password &nbsp;</td>
+                <td> @Html.TextBoxFor(x => x.Password)</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td> @Html.TextBoxFor(x => x.Email)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input class="btn btn-primary btn-lg" type="submit" value="Зарегестрироваться"/>
+                </td>
+            </tr>
+        </table>
+    }
+</div>

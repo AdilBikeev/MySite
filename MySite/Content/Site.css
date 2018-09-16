@@ -22,3 +22,39 @@ select,
 textarea {
     max-width: 280px;
 }
+
+ .line_block {
+    float: left; /*Задаем обтекание*/
+    line-height: 15px; /*Высота строки +  верт. центрирования текста*/
+    border: 10px solid blue;
+    border-radius:50px;
+    background-color:white;
+    color: gray;
+    margin-top: 60px;
+    width: 320px; /*Фиксируем ширину блока*/
+    margin-right: 10px;
+    text-align: center; /*Центрируем текст по горизонтали*/
+}
+
+/*Стили для валидаторов*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}

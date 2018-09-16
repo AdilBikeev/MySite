@@ -1,0 +1,20 @@
+﻿@model string
+
+
+@{
+    ViewBag.Title = "Thanks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model</h2><br /><br />
+
+@{
+    if (Model != "Регистрация пройдена успешно !")//если регистрация не прошла успешно
+    {
+        <a class="btn btn-primary btn-lg" href="http://localhost:4490/Home/Registration">Вернуться на страницу регистраци</a>
+    }
+    else//при успешной регистрации
+    {
+        <a class="btn btn-primary btn-lg" href="http://localhost:4490/Home/Index">Вернуться на домашнюю страницу</a>
+    }
+}
