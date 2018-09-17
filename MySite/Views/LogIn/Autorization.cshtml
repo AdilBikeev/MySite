@@ -1,0 +1,30 @@
+﻿@model MySite.Models.Users
+
+@{
+    ViewBag.Title = "Autorization";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Авторизация</h2>
+
+@using (Html.BeginForm("Autorization", "LogIn", new { user = Model }))
+{
+            if(ViewBag.Msg !=null)
+            {
+                <p style="color:red">@ViewBag.Msg</p>
+            }
+    <table>
+        <tr>
+            <td>Login</td>
+            <td> @Html.TextBoxFor(x => x.Login)</td>
+        </tr>
+        <tr>
+            <td>Password &nbsp;</td>
+            <td> @Html.TextBoxFor(x => x.Password)</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input class="btn btn-primary btn-lg" style="margin-top:20px" type="submit" value="Войти" />
+            </td>
+        </tr>
+    </table>
+}

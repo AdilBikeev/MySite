@@ -8,14 +8,21 @@
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<div class="line_block">
-    <h2>Регистрация</h2>
-    <h7>Вы ещё не зарегестрировались на нашем сайте ? Тогда жми кнопку ниже !</h7>
-    <p style="position:relative; margin-top:30px">
-        <a href="http://localhost:4490/Home/Registration" class="btn btn-primary btn-lg">Зарегестрироваться</a>
-    </p>
-</div>
-    <div class="line_block">DIV 2</div>
-    <div class="line_block">DIV 3</div>
+@{
+    var user = Request.Cookies["User"];
+    if (user == null)
+    {//в случаи, если пользователь на странице еще не авторизован
+        <div class="line_block">
+            <h2>Регистрация</h2>
+            <h7>Вы ещё не зарегестрировались на нашем сайте ? Тогда жми кнопку ниже !</h7>
+            <p style="position:relative; margin-top:30px">
+                <a href="http://localhost:4490/Home/Registration" class="btn btn-primary btn-lg">Зарегестрироваться</a>
+            </p>
+        </div>
+    }
+}
+
+<div class="line_block">DIV 2</div>
+<div class="line_block">DIV 3</div>
 
 

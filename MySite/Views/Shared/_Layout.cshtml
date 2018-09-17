@@ -25,7 +25,17 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                     <li>
-                        <button class="btn btn-primary" style="margin-top:7px" type="button">Войти</button>
+                        @{
+                            var user = Request.Cookies["User"];
+                            if (user != null)
+                            {//в случаи, если пользователь на странице уже авторизован
+                                @Html.ActionLink(user.Value, "Autorization", "LogIn", null, new { @class = "btn btn-primary btn-lg" })
+                            }
+                            else
+                            {//если пользователь не авторизован
+                                @Html.ActionLink("Войти", "Autorization", "LogIn", null, new { @class = "btn btn-primary btn-lg" })
+                            }
+                        }
                     </li>
                 </ul>
             </div>
