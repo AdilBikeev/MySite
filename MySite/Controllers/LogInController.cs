@@ -30,10 +30,6 @@ namespace MySite.Controllers
                     {
                         ViewBag.Msg = "";
                         HttpCookie cookie = new HttpCookie("User");//в качестве cooki запоминаем эмаил пользователя
-                        //{
-                        //    Expires = DateTime.Now.AddDays(-1),
-                        //    Value = null
-                        //};
                         cookie.Expires = DateTime.Now.AddDays(31);
                         cookie.Value = item.Email;
                         Response.Cookies.Add(cookie);

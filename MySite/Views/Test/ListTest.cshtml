@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Тесты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Тесты</h2>
+<hr />
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow" id="test_block">
+                <img class="card-img-top" style="width: 100%; height: 225px; display: block;" alt="Thumbnail [100%x225]" src="https://uploads.hb.cldmail.ru/category/9/image/244d780471e51b6c6093e9f8599bd0ee.png" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" data-holder-rendered="true">
+                <div class="card-body">
+                    <div class="body__item topics">
+                    <div class="topics__list">Темы тестирования</div>
+                        <ul class="topics__list topics-list">
+                            <li class="topics-list__item">Платформа microsoft .net framework   и среда visual studio .net</li>
+                            <li class="topics-list__item">Основные понятия и операторы языка с#</li>
+                            <li class="topics-list__item">Массивы символы и строки</li>
+                            <li class="topics-list__item">Работа с файловой системой и организация файлового  ввода-вывода данных</li>
+                            <li class="topics-list__item">Классы и объекты</li>
+                            <li class="topics-list__item">Коллекции</li>
+                        </ul>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <div class="line_block float">
+                                @{
+                                    var user = Request.Cookies["User"];
+                                    if (user != null)
+                                    {//в случаи, если пользователь на странице уже авторизован
+                                        <p style="position:relative; margin:10px">
+                                            <a href="~/Test/Select_SharpTeest" class="btn btn-primary btn-lg">Начать Тест</a>
+                                        </p>
+                                    }
+                                    else
+                                    {//если пользователь не авторизован
+                                        <h2>Авторизация</h2>
+                                        <h7>Чтобы начать тест, нужно авторизоваться на нашем сайте</h7>
+                                        <p style="position:relative; margin-top:30px">
+                                            <a href="~/LogIn/Autorization" class="btn btn-primary btn-lg">Авторизоваться</a>
+                                        </p>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -157,6 +157,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +244,10 @@
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Home\Thanks.cshtml" />
     <Content Include="Views\LogIn\Autorization.cshtml" />
+    <Content Include="Views\Profile\Home.cshtml" />
+    <Content Include="Views\Test\ListTest.cshtml" />
+    <Content Include="Views\Shared\_LayoutTest.cshtml" />
+    <Content Include="Views\Test\Select_SharpTeest.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -24,17 +24,34 @@ textarea {
 }
 
  .line_block {
-    float: left; /*Задаем обтекание*/
-    line-height: 15px; /*Высота строки +  верт. центрирования текста*/
     border: 10px solid blue;
     border-radius:50px;
     background-color:white;
     color: gray;
-    margin-top: 60px;
     width: 320px; /*Фиксируем ширину блока*/
+}
+
+#test_block {
+    background-color:aquamarine;
+    border: 5px solid green;
+    border-radius: 50px;
+    padding: 20px;
+}
+
+.float {
+    float: left; /*Задаем обтекание*/
     margin-right: 10px;
     text-align: center; /*Центрируем текст по горизонтали*/
+    line-height: 15px; /*Высота строки +  верт. центрирования текста*/ margin-top: 60px;
 }
+
+ul.menu-top > li {
+    display: inline; /* Располагаем элементы по горизонтали */
+    list-style: none; /* Убираем маркеры списка */
+    margin:0;
+    padding:0;
+}
+
 
 /*Стили для валидаторов*/
 .field-validation-error {

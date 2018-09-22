@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Select_SharpTeest";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+
+<div class="jumbotron">
+    <div class="gb-test-page__left test-control">
+        <div class="container footer-stick">
+            <form name="test" method="post">
+                <div class="onetest" name="onetest">
+                    <font color="#000099" size="4">
+                        <b>
+                            Вопрос № 1
+                        </b>
+                    </font>
+                    <br>
+                    <font color="#333333" saze="3">
+                        <p>  Какие из перечисленных типов данных относятся к целочисленным? </p>
+                    </font>
+                    <div class="otv" id="torf1">
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="quest1-ans1" id="exampleRadios1" value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                            float
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="quest1-ans2" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                            int
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="quest1-ans3" id="exampleRadios3" value="option3">
+                        <label class="form-check-label" for="exampleRadios3">
+                            double
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="onetest" name="onetest">
+                    <font color="#000099" size="4">
+                        <b>
+                            Вопрос № 2
+                        </b>
+                    </font><br>
+                    <font color="#333333" saze="3">
+                        <p>  Какие из перечисленных типов данных относятся к целочисленным? </p>
+                    </font>
+                    <div class="otv" id="torf1">
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="quest1-ans1" id="exampleRadios1" value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                            float
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="quest1-ans2" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                            int
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="quest1-ans3" id="exampleRadios3" value="option3">
+                        <label class="form-check-label" for="exampleRadios3">
+                            double
+                        </label>
+                    </div>
+                </div>
+                <div id="winotv"></div>
+                <div id="rezbutton">
+                    <input class="btn btn-success" name="simb" onclick="check_me()" type="button" value="Проверить результат">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*
+   1) Создать валидатор, который будет проверять, что в каждом блоке был выбран хотяб 1 ответ на вопрос
+   2) обработать событие отправки данных в форму и вывод результата тестирования
+*@

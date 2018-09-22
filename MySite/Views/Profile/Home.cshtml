@@ -1,0 +1,19 @@
+﻿@model MySite.Models.Users
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Мой профиль</h2>
+<hr />
+<b>Email</b>@Html.DisplayFor(x => x.Email) &nbsp;&nbsp;&nbsp;
+ @{
+     if (Request.Cookies["User"] != null)
+     {
+         <span>@Request.Cookies["User"].Value</span>
+     }
+         }
+     @Html.ActionLink("Выйти", "Exit", "Profile", null, new { @class = "btn btn-primary btn-lg" })
+
+
