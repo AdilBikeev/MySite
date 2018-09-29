@@ -23,10 +23,10 @@
                         </button>
                         @Html.ActionLink("О приложении", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     </li>
-                    
+
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li><button type="button" class="btn btn-success">Тест</button></li>
-                </ul> 
+                </ul>
+                @Html.ActionLink("Тест", "ListTest", "Test", new { area = "" }, new { @class = "btn btn-success btn-lg" })
                 @{
                     var user = Request.Cookies["User"];
                     if (user != null)

@@ -250,7 +250,7 @@
     <Content Include="Views\Profile\Home.cshtml" />
     <Content Include="Views\Test\ListTest.cshtml" />
     <Content Include="Views\Shared\_LayoutTest.cshtml" />
-    <Content Include="Views\Test\Select_SharpTeest.cshtml" />
+    <Content Include="Views\Test\Select_SharpTest.cshtml" />
     <Content Include="Views\Test\Result.cshtml" />
   </ItemGroup>
   <ItemGroup />

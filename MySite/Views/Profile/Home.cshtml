@@ -15,5 +15,16 @@
      }
          }
      @Html.ActionLink("Выйти", "Exit", "Profile", null, new { @class = "btn btn-primary btn-lg" })
-
+<br/>
+<b>Пройденные тесты</b>
+<ul>
+    <li>
+        <i>C# &nbsp;&nbsp;&nbsp;&nbsp;</i>
+        <div class="progress">
+            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@Model.Sharp%"
+               
+                 aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </li>
+</ul>
 
