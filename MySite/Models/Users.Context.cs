@@ -26,5 +26,6 @@ namespace MySite.Models
         }
     
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Sharp> Sharp { get; set; }
     }
 }

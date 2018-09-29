@@ -162,6 +162,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sharp.cs">
+      <DependentUpon>Users.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Users.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -170,10 +173,10 @@
     <Compile Include="Models\Users.cs">
       <DependentUpon>Users.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Users.Designer.cs">
+    <Compile Include="Models\Site.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Users.edmx</DependentUpon>
+      <DependentUpon>Site.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Users1.cs">
       <AutoGen>True</AutoGen>
@@ -198,11 +201,11 @@
     <Content Include="Models\Users.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Users.Context.cs</LastGenOutput>
-      <DependentUpon>Users.edmx</DependentUpon>
+      <DependentUpon>Site.edmx</DependentUpon>
     </Content>
     <Content Include="Models\Users.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Users.edmx</DependentUpon>
+      <DependentUpon>Site.edmx</DependentUpon>
       <LastGenOutput>Users1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
@@ -210,12 +213,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\Users.edmx">
+    <EntityDeploy Include="Models\Site.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Users.Designer.cs</LastGenOutput>
+      <LastGenOutput>Site.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Users.edmx.diagram">
-      <DependentUpon>Users.edmx</DependentUpon>
+    <Content Include="Models\Site.edmx.diagram">
+      <DependentUpon>Site.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -248,6 +251,7 @@
     <Content Include="Views\Test\ListTest.cshtml" />
     <Content Include="Views\Shared\_LayoutTest.cshtml" />
     <Content Include="Views\Test\Select_SharpTeest.cshtml" />
+    <Content Include="Views\Test\Result.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

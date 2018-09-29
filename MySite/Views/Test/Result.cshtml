@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+<h2>Тест пройден</h2>
+
+<div class="test-result card bg-light card-body" style="background: #fff !important; margin-bottom: 10px;">
+    <h4 style="margin-top: 0;">Результат теста</h4>
+    <div id="test_block">
+        <h1>
+            @ViewBag.Result
+        </h1>
+        <p>
+            @ViewBag.Message
+        </p>
+    </div>
+</div>
