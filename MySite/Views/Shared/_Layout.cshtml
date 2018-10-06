@@ -27,6 +27,7 @@
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                 </ul>
                 @Html.ActionLink("Тест", "ListTest", "Test", new { area = "" }, new { @class = "btn btn-success btn-lg" })
+                @Html.ActionLink("Документация", "Home", "Documentation", new { area = "" }, new { @class = "btn btn-danger btn-lg" })
                 @{
                     var user = Request.Cookies["User"];
                     if (user != null)
@@ -45,9 +46,47 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
+    <div class="container-fluid">
+        <!--Левый div-->
+        <div class="col-sm-3">
+            <!-- List-Group Panel -->
+            <div class="jumbotron">
+                <div class="card-header p-b-0">
+                    <h5 class="card-title"><i class="fa fa-bullhorn" aria-hidden="true"></i> Языки Программирования</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action" href="#">Си</a>
+                    <a class="list-group-item list-group-item-action" href="#">С++</a>
+                    <a class="list-group-item list-group-item-action" href="#">С#</a>
+                    <a class="list-group-item list-group-item-action" href="#">Java</a>
+                    <a class="list-group-item list-group-item-action" href="#">Python</a>
+                </div>
+            </div>
+            <!-- Text Panel -->
+            <div class="jumbotron">
+                <div class="list-group list-group-flush">
+                    <h5 class="card-title"><i class="fa fa-cog" aria-hidden="true"></i> Дополнительные статьи</h5>
+                </div>
+                <div class="card-block">
+                    <a class="list-group-item list-group-item-action" href="#">Windows</a>
+                    <a class="list-group-item list-group-item-action" href="#">Linux</a>
+                    <a class="list-group-item list-group-item-action" href="#">Git</a>
+                    <a class="list-group-item list-group-item-action" href="#">MySQL</a>
+                    <a class="list-group-item list-group-item-action" href="#">Entity FrameWork</a>
+                </div>
+            </div>
+        </div>
 
+        <!--Централый div-->
+        <div class="col-sm-6">
+            @RenderBody()
+        </div>
+
+        <!--Правый div-->
+        <div class="col-sm-3">
+            <!--Баннер для рекламы--> 
+            <img width="200" height="400" alt="Advertisement" src="http://rf24.org/nov2/schoolm/images/_index_78f2db9d077f4e7141711e6d9455ab43_4012_.jpg" border="0">
+        </div>
     </div>
     <div class="container body-content">
         <hr />

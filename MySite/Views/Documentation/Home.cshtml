@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!--Карусель-->
+<div class="carousel slide" id="myCarousel" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li class="active" data-target="#myCarousel" data-slide-to="0"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+
+        <!--1 слайд - Документация-->
+        <div class="item active">
+            <img alt="First slide" style="width: 1200px; height: 400px;" src="https://www.mesotheliomacircle.org/wp-content/uploads/2017/05/banner-legal-1.jpg" data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Документация</h1>
+                    <p><b>Здесь вы можете познакомиться с документацией интересующего вас языка программирования. Для этого достаточно нажать на кнопку 'Подробнее' под интересующем вас языком</b></p>
+                </div>
+            </div>
+        </div>
+
+        <!--2 слайд - Тесты-->
+        <div class="item">
+            <img alt="Second slide" style="width: 1200px; height: 400px;" src="http://www.pamtech.biz/wp-content/uploads/2017/09/Expertise.jpg" data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Тесты</h1>
+                    <p>
+                        Перед тем как приступать к изучению документацию - определите свой уровень знаний того или иного языка или технологий.
+                        Для этого нажмите на кнопку 'Перейти к тестам'
+                    </p>
+                    <p><a class="btn btn-lg btn-success" role="button" href="~/Test/ListTest">Перейти к тестам</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!--3 слайд - О портале-->
+        <div class="item">
+            <img alt="Third slide" style="width: 1200px; height: 400px;" src="http://www.council.ru/upload/medialibrary/81c/faq_o_razrabotke_mobilnyih_prilozheniy1.jpg" data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Портал</h1>
+                    <p>Впервые на нашем портале и не знаете что здесь и к чему ? Тогда жмите на кнопку 'О портале', чтобы узнать о нас больше !</p>
+                    <p><a class="btn btn-lg btn-success" role="button" href="~/Home/About">О портале</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+
+<!--Row-1-->
+<div class="row">
+    <div class="col-lg-4">
+        <img class="img-circle" style="width: 140px; height: 140px;" alt="140x140" src="https://lh3.ggpht.com/Ry-yy4aT95tpPkCrSrSQG51jwIKnnZnL1bm_RT_JKfa23f9LWHB3QPrGeJ5lNbQbKQ=w140" data-src="holder.js/140x140">
+        <h2>C#</h2>
+        <p>
+            В этом разделе представлены подробные сведения 
+            об основных возможностях языка C#, а также о функциях, 
+            доступных в этом языке благодаря платформе .NET Framework.
+        </p>
+        <p><a class="btn btn-warning" role="button" href="#">Подробнее »</a></p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+        <img class="img-circle" style="width: 140px; height: 140px;" alt="140x140" src="https://lh3.googleusercontent.com/IXhnHnjm-6Lp3HRNMpAQ2T7H4udZPT-Y_3QywE7Byu2fFL39mS8JCfnYW2OQXyV8vA=w140" data-src="holder.js/140x140">
+        <h2>C++</h2>
+        <p>
+            В этом справочнике описывается язык программирования С++
+            в том виде, в котором он реализован в
+            Microsoft Visual C++. Справочник создан на
+            основе аннотированного справочного руководства по C++
+            Маргарет Эллис (Margaret Ellis) и
+            Бьорна Страуструп (Bjarne Stroustrup) и международного
+            стандарта ANSI/ISO C++ (ISO/IEC FDIS 14882).
+            Включены реализации компонентов языка С++ корпорацией Майкрософт.
+        </p>
+        <p><a class="btn btn-warning" role="button" href="#">Подробнее »</a></p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+        <img class="img-circle" style="width: 140px; height: 140px;" alt="140x140" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/UCSD_Shuttle_C_icon.svg/120px-UCSD_Shuttle_C_icon.svg.png" data-src="holder.js/140x140">
+        <h2>C</h2>
+        <p>
+            В Справочнике по языку C описывается язык программирования
+            С в том виде, в котором он реализован в Microsoft C.
+            Книга создана на основе стандарта ANSI C и
+            содержит дополнительные сведения по его расширениям корпорацией Microsoft.
+        </p>
+        <p><a class="btn btn-warning" role="button" href="#">Подробнее »</a></p>
+    </div><!-- /.col-lg-4 -->
+</div>
+
+<!--Row-2-->
+<div class="row">
+    <div class="col-lg-4">
+        <img class="img-circle" style="width: 140px; height: 140px;" alt="140x140" src="http://training.acutesoft.com/wp-content/uploads/2017/01/java01.png" data-src="holder.js/140x140">
+        <h2>Java</h2>
+        <p>
+            Данный справочник даст полное
+            представление о языке Java и поможет начинающим программистам.
+        </p>
+        <p><a class="btn btn-warning" role="button" href="#">Подробнее »</a></p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+        <img class="img-circle" style="width: 140px; height: 140px;" alt="140x140" src="http://python-bot.msngers.com/uploads/bots/1924.png" data-src="holder.js/140x140">
+        <h2>Python</h2>
+        <p>
+            Настоящее справочное руководство описывает синтаксис и "ядро" семантики языка Python.
+            Руководство является кратким, но мы попытались сделать его точным и полным.
+        </p>
+        <p><a class="btn btn-warning" role="button" href="#">Подробнее »</a></p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+        <img class="img-circle" style="width: 140px; height: 140px;" alt="140x140" src="http://www.kulchuri.com/images/js.png" data-src="holder.js/140x140">
+        <h2>JavaScript</h2>
+        <p>
+            В данной документации описывается реализация JavaScript корпорацией Microsoft.
+            Эта реализация совместима с 5-м выпуском спецификации языка ECMAScript.
+            Она также предоставляет дополнительные функции, не входящие в стандарты ECMA.
+        </p>
+        <p><a class="btn btn-warning" role="button" href="#">Подробнее »</a></p>
+    </div><!-- /.col-lg-4 -->
+</div>

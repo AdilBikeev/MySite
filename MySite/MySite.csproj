@@ -155,6 +155,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -252,6 +253,7 @@
     <Content Include="Views\Shared\_LayoutTest.cshtml" />
     <Content Include="Views\Test\Select_SharpTest.cshtml" />
     <Content Include="Views\Test\Result.cshtml" />
+    <Content Include="Views\Documentation\Home.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
