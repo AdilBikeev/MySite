@@ -1,0 +1,53 @@
+﻿@model String
+
+@{
+    ViewBag.Title = "Sharp";
+    Layout = "~/Views/Shared/_LayoutDocumentation.cshtml";
+}
+
+@section LeftDiv{
+    <!-- List-Group Panel -->
+    <div class="jumbotron">
+        <div class="card-header p-b-0">
+            <h5 class="card-title"><i class="fa fa-bullhorn" aria-hidden="true"></i> Языки Программирования</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            @Html.ActionLink("Глава 1. Введение в C#", "Sharp", "Documentation", new { chapter = 1 }, new { @class = "list-group-item list-group-item-action" })
+            @Html.ActionLink("Глава 2. Основы программирования", "Sharp", "Documentation", new { chapter = 2 }, new { @class = "list-group-item list-group-item-action" })
+            @Html.ActionLink("Глава 3. Класы. Объектно-оринтированное программирование", "Sharp", "Documentation", new { chapter = 3 }, new { @class = "list-group-item list-group-item-action" })
+            @Html.ActionLink("Глава 4. Интерфейсы", "Sharp", "Documentation", new { chapter = 4 }, new { @class = "list-group-item list-group-item-action" })
+            @Html.ActionLink("Глава 5. Делегаты, события и лямбды", "Sharp", "Documentation", new { chapter = 5 }, new { @class = "list-group-item list-group-item-action" })
+        </div>
+    </div>
+}
+<h1>C#</h1>
+<hr />
+@if (Model != null)
+{
+    <div id="test_block">
+        @{ 
+            string str = "";
+            for (int i = 0; Model[i] != '$'; i++)//покп не прочтем весь текст
+            {
+                if (Model[i] != '\n') { str += Model[i]; }
+                else
+                {//если обнаружен знак нового обзаца - ставим его
+                    <p>@str</p>
+                    <p></p>
+                    str = "";
+                }
+            }
+          }
+    </div>
+}
+else
+{
+    @Html.ActionLink("Глава 1. Введение в C#", "Sharp", "Documentation", new { chapter = 1 }, new { @class = "list-group-item list-group-item-action" })
+    @Html.ActionLink("Глава 2. Основы программирования", "Sharp", "Documentation", new { chapter = 2 }, new { @class = "list-group-item list-group-item-action" })
+    @Html.ActionLink("Глава 3. Класы. Объектно-оринтированное программирование", "Sharp", "Documentation", new { chapter = 3 }, new { @class = "list-group-item list-group-item-action" })
+    @Html.ActionLink("Глава 4. Интерфейсы", "Sharp", "Documentation", new { chapter = 4 }, new { @class = "list-group-item list-group-item-action" })
+    @Html.ActionLink("Глава 5. Делегаты, события и лямбды", "Sharp", "Documentation", new { chapter = 5 }, new { @class = "list-group-item list-group-item-action" })
+}
+
+
+

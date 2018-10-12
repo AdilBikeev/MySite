@@ -49,33 +49,9 @@
     <div class="container-fluid">
         <!--Левый div-->
         <div class="col-sm-3">
-            <!-- List-Group Panel -->
-            <div class="jumbotron">
-                <div class="card-header p-b-0">
-                    <h5 class="card-title"><i class="fa fa-bullhorn" aria-hidden="true"></i> Языки Программирования</h5>
-                </div>
-                <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action" href="#">Си</a>
-                    <a class="list-group-item list-group-item-action" href="#">С++</a>
-                    <a class="list-group-item list-group-item-action" href="#">С#</a>
-                    <a class="list-group-item list-group-item-action" href="#">Java</a>
-                    <a class="list-group-item list-group-item-action" href="#">Python</a>
-                </div>
-            </div>
-            <!-- Text Panel -->
-            <div class="jumbotron">
-                <div class="list-group list-group-flush">
-                    <h5 class="card-title"><i class="fa fa-cog" aria-hidden="true"></i> Дополнительные статьи</h5>
-                </div>
-                <div class="card-block">
-                    <a class="list-group-item list-group-item-action" href="#">Windows</a>
-                    <a class="list-group-item list-group-item-action" href="#">Linux</a>
-                    <a class="list-group-item list-group-item-action" href="#">Git</a>
-                    <a class="list-group-item list-group-item-action" href="#">MySQL</a>
-                    <a class="list-group-item list-group-item-action" href="#">Entity FrameWork</a>
-                </div>
-            </div>
+            @RenderSection("LeftDiv", required: false);
         </div>
+        
 
         <!--Централый div-->
         <div class="col-sm-6">

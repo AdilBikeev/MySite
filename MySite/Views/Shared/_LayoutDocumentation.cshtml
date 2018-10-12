@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "_LayoutDocumentation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section LeftDiv{
+    @RenderSection("LeftDiv", required: false)
+}
+
+@RenderBody()
