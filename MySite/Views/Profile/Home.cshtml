@@ -1,30 +1,65 @@
 ﻿@model MySite.Models.Users
 
 @{
-    ViewBag.Title = "Home";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Home";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Мой профиль</h2>
-<hr />
-<b>Email</b>@Html.DisplayFor(x => x.Email) &nbsp;&nbsp;&nbsp;
- @{
-     if (Request.Cookies["User"] != null)
-     {
-         <span>@Request.Cookies["User"].Value</span>
-     }
-         }
-     @Html.ActionLink("Выйти", "Exit", "Profile", null, new { @class = "btn btn-primary btn-lg" })
-<br/>
-<b>Пройденные тесты</b>
-<ul>
-    <li>
-        <i>C# &nbsp;&nbsp;&nbsp;&nbsp;</i>
-        <div class="progress">
-            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@Model.Sharp%"
-               
-                 aria-valuemin="0" aria-valuemax="100"></div>
+@{
+    if (Request.Cookies["User"] != null)
+    {
+<div class="jumbotron" style="background-color:#0ab14b;color:white">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Мой профиль</h2>
+            <div class="card mb-4 box-shadow">
+                <br />
+                @Html.ActionLink("Редактировать", "Exit", "Profile", null, new { @class = "btn btn-primary btn-lg" })
+            </div>
         </div>
-    </li>
-</ul>
+    </div>
+    
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <b>Имя</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.Name) <br />
+                    <b>Фамилия</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.Surname) <br />
+                    <b>Дата рождения</b>&nbsp;&nbsp;&nbsp;@Model.DateBirthDay.ToLongDateString() <br />
+                    <b>Email</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.Email)
+
+                    <!--Обновление страницы профиля, добавлена информация: имя, фамиля, дата рождения, о себе-->
+
+                    @*@Html.ActionLink("Выйти", "Exit", "Profile", null, new { @class = "btn btn-primary btn-lg" })*@
+                </div>
+            </div>
+            
+        </div>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                    <b>О себе</b><br />
+                    @Html.DisplayFor(x=>x.AboutOneself)
+            </div>
+        </div>
+        <hr />
+
+    </div>
+    <b>Пройденные тесты</b>
+    <ul>
+        <li>
+            <i>C# &nbsp;&nbsp;&nbsp;&nbsp;</i>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@Model.Sharp%"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </li>
+    </ul>
+</div>
+    }
+}
 
