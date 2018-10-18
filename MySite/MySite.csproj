@@ -265,6 +265,7 @@
     <Content Include="Views\Documentation\Home.cshtml" />
     <Content Include="Views\Shared\_LayoutDocumentation.cshtml" />
     <Content Include="Views\Documentation\Sharp.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

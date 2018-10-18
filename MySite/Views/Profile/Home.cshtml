@@ -16,7 +16,7 @@
             <h2>Мой профиль</h2>
             <div class="card mb-4 box-shadow">
                 <br />
-                @Html.ActionLink("Редактировать", "Exit", "Profile", null, new { @class = "btn btn-primary btn-lg" })
+                @Html.ActionLink("Редактировать", "Edit", "Profile", null, new { @class = "btn btn-primary btn-lg" })
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
 
                     <!--Обновление страницы профиля, добавлена информация: имя, фамиля, дата рождения, о себе-->
 
-                    @*@Html.ActionLink("Выйти", "Exit", "Profile", null, new { @class = "btn btn-primary btn-lg" })*@
+                    @Html.ActionLink("Выйти", "Exit", "Profile", null, new { @class = "btn btn-primary btn-lg" })
                 </div>
             </div>
             
