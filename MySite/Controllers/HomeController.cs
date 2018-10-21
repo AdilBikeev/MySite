@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data.Entity;
 using System.Web.Mvc;
 using MySite.Models;
 
@@ -10,7 +9,7 @@ namespace MySite.Controllers
 {
     public class HomeController : Controller
     {
-        SiteDbEntities dbSite=new SiteDbEntities();
+        SiteDb dbSite=new SiteDb();
 
         public ActionResult Index()//возвращает домашнюю страницу
         {
