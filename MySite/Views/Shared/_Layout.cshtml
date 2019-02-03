@@ -4,7 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/Content/Site.css" />
     <title>@ViewBag.Title – приложение ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/Site.css")
@@ -23,7 +22,6 @@
                         </button>
                         @Html.ActionLink("О портале", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     </li>
-
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                 </ul>
                 @Html.ActionLink("Тест", "ListTest", "Test", new { area = "" }, new { @class = "btn btn-success btn-lg" })
@@ -33,10 +31,20 @@
                     if (user != null)
                     {//в случаи, если пользователь на странице уже авторизован
                      //ссылка на странциу профиля авторизованного пользователя
-                        <label style="float:right">
-                            @Html.ActionLink("Мой профиль", "Home", "Profile", null, new { @class = "btn btn-primary btn-lg" })
-                        </label>
-                        <label class="navbar-brand" style="float:right">@user.Value</label>
+                        if (user.Value != "AdilAdminBikeev1999h@mail.ru")
+                        {
+                            <label style="float:right">
+                                @Html.ActionLink("Мой профиль", "Home", "Profile", null, new { @class = "btn btn-primary btn-lg" })
+                            </label>
+                            <label class="navbar-brand" style="float:right">@user.Value</label>
+                        }
+                        else
+                        {
+                            <label style="float:right">
+                                @Html.ActionLink("Выйти", "Exit", "Profile", null, new { @class = "btn btn-danger btn-lg" })
+                            </label>
+                            <label class="navbar-brand" style="float:right">Редактор тестов</label>
+                        }
                     }
                     else
                     {//если пользователь не авторизован
@@ -60,7 +68,52 @@
 
         <!--Правый div-->
         <div class="col-sm-3">
-            <!--Баннер для рекламы--> 
+            @using MySite.WebService
+            <!--Вызываем метод для получения курса валют-->
+            @ExchangeRate.GetCurs()
+            <div class="br-curs">
+                <div class="back-curs">
+                    <ul class="menu-top">
+                        <li>
+                            <b>&nbsp;&nbsp;Курс валют</b>
+                        </li>
+                    </ul>
+                </div>
+                <hr />
+                <div class="back-curs">
+                    <ul class="menu-top">
+                        <li>
+                            <picture>
+                                <img src="~/Content/Images/Shared/_Layout/USD.png" style="height:30px; width:30px">
+                            </picture>
+                        </li>
+                        <li>
+                            <b>@ExchangeRate.usdValue</b>
+                        </li>
+                    </ul>
+                </div>
+                <div class="back-curs">
+                    <ul class="menu-top">
+                        <li>
+                            <picture>
+                                <img src="~/Content/Images/Shared/_Layout/EUR.png" style="height:30px; width:30px">
+                            </picture>
+                        </li>
+                        <li>
+                            <b>@ExchangeRate.euroValue</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+
+           
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <!--Баннер для рекламы-->
             <img width="200" height="400" alt="Advertisement" src="http://rf24.org/nov2/schoolm/images/_index_78f2db9d077f4e7141711e6d9455ab43_4012_.jpg" border="0">
         </div>
     </div>

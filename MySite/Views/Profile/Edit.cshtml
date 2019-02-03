@@ -1,38 +1,57 @@
 ﻿@model MySite.Models.Users
-
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактирование";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @if (Request.Cookies["User"] != null)//если пользователь авторизован
 {
     <h2>Редактирование</h2>
     <hr />
-    using (Html.BeginForm("Edit", "Profile", new { user = Model }))
+
+    using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
+
+        @Html.EditorFor(x => x.Login, new { style = "display:none", data_val = "false" });
+        @Html.EditorFor(x => x.Password, new { style = "display:none", data_val = "false" });
+        @Html.EditorFor(x => x.PasswordConfirm, new { style = "display:none", data_val = "false" });
+        @Html.EditorFor(x => x.Email, new { style = "display:none", data_val = "false" });
+        <script type="text/javascript" src="~/Scripts/Profile/Edit/AntiValid.js"></script>
+
+
         if (ViewBag.Msg != null)//Если есть сообщение
         {//выводим его
             <b style="color:red">@ViewBag.Msg</b>
             <hr />
         }
-        @Html.ValidationSummary()
         <table>
             <tr>
                 <td>Имя &nbsp;&nbsp;&nbsp;</td>
-                <td>@Html.EditorFor(x => x.Name)</td>
+                <td>
+                    @Html.EditorFor(x => x.Name)
+                    @Html.ValidationMessageFor(x => x.Name)
+                </td>
             </tr>
             <tr>
                 <td>Фамилия &nbsp;&nbsp;&nbsp;</td>
-                <td>@Html.EditorFor(x => x.Surname)</td>
+                <td>
+                    @Html.EditorFor(x => x.Surname)
+                    @Html.ValidationMessageFor(x => x.Surname)
+                </td>
             </tr>
             <tr>
                 <td>Дата рождения &nbsp;&nbsp;&nbsp;</td>
-                <td>@Html.EditorFor(x => x.DateBirthDay)</td>
+                <td>
+                    @Html.EditorFor(x => x.DateBirthDay)
+                    @Html.ValidationMessageFor(x => x.DateBirthDay)
+                </td>
             </tr>
             <tr>
                 <td>О себе &nbsp;&nbsp;&nbsp;</td>
-                <td>@Html.EditorFor(x => x.AboutOneself)</td>
+                <td>
+                    @Html.EditorFor(x => x.AboutOneself)
+                    @Html.ValidationMessageFor(x => x.AboutOneself)
+                </td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -41,6 +60,7 @@
             </tr>
         </table>
     }
+
 }
 else
 {

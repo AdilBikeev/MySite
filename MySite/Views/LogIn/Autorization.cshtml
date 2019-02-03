@@ -1,25 +1,37 @@
 ﻿@model MySite.Models.Users
 
 @{
-    ViewBag.Title = "Autorization";
+    ViewBag.Title = "Авторизация";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Авторизация</h2>
 
 @using (Html.BeginForm("Autorization", "LogIn", new { user = Model }))
 {
-            if(ViewBag.Msg !=null)
-            {
-                <p style="color:red">@ViewBag.Msg</p>
-            }
+    if(ViewBag.Msg !=null)
+    {
+        <p style="color:red">@ViewBag.Msg</p>
+    }
+    @Html.TextBoxFor(x =>x.PasswordConfirm,new { style = "display:none",  data_val = "false"})
+    @Html.TextBoxFor(x =>x.Email,new { style = "display:none",  data_val = "false"  })
+    @Html.TextBoxFor(x =>x.Name,new { style = "display:none",  data_val = "false"  })
+    @Html.TextBoxFor(x =>x.Surname,new { style = "display:none",  data_val = "false"  })
+    @Html.TextBoxFor(x =>x.DateBirthDay,new { style = "display:none",  data_val = "false"  })
+    @Html.TextBoxFor(x =>x.AboutOneself,new { style = "display:none",  data_val = "false"  })
     <table>
         <tr>
             <td>Login</td>
-            <td> @Html.TextBoxFor(x => x.Login)</td>
+            <td>
+                @Html.TextBoxFor(x => x.Login)
+                @Html.ValidationMessageFor(x => x.Login)
+            </td>
         </tr>
         <tr>
             <td>Password &nbsp;</td>
-            <td> @Html.TextBoxFor(x => x.Password)</td>
+            <td>
+                @Html.TextBoxFor(x => x.Password, new { type = "password"})
+                @Html.ValidationMessageFor(x => x.Password)
+            </td>
         </tr>
         <tr>
             <td colspan="2">
@@ -27,4 +39,5 @@
             </td>
         </tr>
     </table>
+
 }

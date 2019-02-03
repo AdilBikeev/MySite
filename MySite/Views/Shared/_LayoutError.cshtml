@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/Content/Error/ErrorCss.css" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/Error/ErrorCss.css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>Ошибка @Response.StatusCode</title>
+</head>
+<body>
+    <div>
+        <section class="header11 cid-qwTx7JvHJa mbr-fullscreen" id="header11-1" data-rv-view="4399">
+            <div class="container align-left">
+                <div class="bg-error">
+                    <h1><span style="font-style: normal;">@RenderBody()</span></h1>
+                    <h2>Упсс! кажется что-то пошло не так...</h2>
+                    <p>Страница, которую вы ищете, недоступна. Пожалуйста, проверьте URL</p>
+                    <div><a class="btn btn-warning" href="~/Home/Index">ВЕРНУТСЬЯ НА САЙТ</a></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

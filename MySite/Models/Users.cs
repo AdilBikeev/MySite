@@ -11,17 +11,37 @@ namespace MySite.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Users
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "*Поле обязательно для заполнения")]
+        [RegularExpression("^[а-яА-ЯёЁa-zA-Z0-9]+$", ErrorMessage = "*Логин может состоять только из букв и цифр")]
         public string Login { get; set; }
+
+        [Required(ErrorMessage = "*Поле обязательно для заполнения")]
+        [RegularExpression("^[а-яА-ЯёЁa-zA-Z0-9]+$", ErrorMessage = "*Пароль может состоять только из букв и цифр")]
         public string Password { get; set; }
+
+        [Compare("Password", ErrorMessage = "Пароли должны совпадать")]
+        public string PasswordConfirm { get; set; }
+
+        [Required(ErrorMessage = "*Поле обязательно для заполнения")]
+        [RegularExpression(@"^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$", ErrorMessage = "*Неверынй формат Email. Пример: xxx@mail.ru")]
         public string Email { get; set; }
+
+        [RegularExpression("^[а-яА-ЯёЁa-zA-Z0-9]+$", ErrorMessage = "*Имя может состоять только из букв и цифр")]
         public string Name { get; set; }
+
+        [RegularExpression("^[а-яА-ЯёЁa-zA-Z0-9]+$", ErrorMessage = "*Фамилия может состоять только из букв и цифр")]
         public string Surname { get; set; }
+
+        [RegularExpression(@"(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d", ErrorMessage = "*Неверный формат для даты рождения. Пример: DD-MM-YYYY")]
+        public string DateBirthDay { get; set; }
+
+        [RegularExpression(@"^[a-zA-ZА-Яа-яЁё0-9\s]+$", ErrorMessage = "*Информация \'О себе\' может содержать только буквы/цифры/некоторые символы")]
         public string AboutOneself { get; set; }
-        public DateTime DateBirthDay { get; set; }
-        public int Sharp { get; set; }
     }
 }

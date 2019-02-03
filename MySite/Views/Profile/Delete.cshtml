@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Подтверждение удаления аккаунта";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Request.Cookies["User"] != null)//если пользователь авторизован
+{
+    <h2>Вы действителньо хотите удалить аккаунт ?</h2>
+    using (Html.BeginForm("Delete", "Profile", new { msg = "Аккаунт успешно удалён" }))
+    {
+        <div class="float">
+            <p style="position:relative; margin-top:10px">
+                <input class="btn btn-danger btn-lg" type="submit" value="Да" />
+            </p>
+        </div>
+    }
+    <div class=" float">
+        <p style="position:relative; margin-top:10px">
+            <a href="~/Profile/Home" class="btn btn-primary btn-lg">Нет</a>
+        </p>
+    </div>
+}
+else
+{
+    <h1>Доступ к данной странице имеют только авторизованные пользователи</h1>
+}

@@ -1,22 +1,20 @@
 ﻿@{
     ViewBag.Title = "Домашняя страница";
 }
-
 <div class="jumbotron" style="background-color:#716bd7; color:white">
-    <h2>Добро пожаловать в наш магазин !</h2>
+    <h2>Добро пожаловать на наш сайт !</h2>
     <h7>Ниже вам предоставлены все неоходимые услуги.</h7>
     <p><a href="https://asp.net" class="btn btn-warning btn-lg">Learn more &raquo;</a></p>
 </div>
-
 @{
     var user = Request.Cookies["User"];
     if (user == null)
     {//в случаи, если пользователь на странице еще не авторизован
         <div class="line_block float">
             <h2>Регистрация</h2>
-            <h7>Вы ещё не зарегестрировались на нашем сайте ? Тогда жми кнопку ниже !</h7>
+            <h7>Вы ещё не зарегистрировались на нашем сайте ? Тогда жми кнопку ниже !</h7>
             <p style="position:relative; margin-top:30px">
-                <a href="~/Home/Registration" class="btn btn-primary btn-lg">Зарегестрироваться</a>
+                <a href="~/Home/Registration" class="btn btn-primary btn-lg">Зарегистрироваться</a>
             </p>
         </div>
         <div class="line_block float">
@@ -36,30 +34,41 @@
     }
     else
     {
-        <div class="line_block float">
-            <h2>Тесты</h2>
-            <h7>Желаете узнать насколько хорошо вы знаете тот или иной язык программирования ? Тогда жми кнопку ниже !</h7>
-            <p style="position:relative; margin-top:30px">
-                <a href="~/Test/ListTest" class="btn btn-success btn-lg">Перейти к тестам</a>
-            </p>
-        </div>
-        <div class="line_block float">
-            <h2>Документация</h2>
-            <h7>На нашем сайте доступна удобная со всех сторон документация по 6-ти языкам программирвоания. Помимо этого вы можете изучить ту или иную востребованную технологию или ОС</h7>
-            <p style="position:relative; margin-top:30px">
-                <a href="~/Documentation/Home" class="btn btn-warning btn-lg">Перейти к документации</a>
-            </p>
-        </div>
-        <div class="line_block float">
-            <h2>Профиль</h2>
-            <h7>На странице вашего профиля доступна вся необходимая информация в том числе и результаты пройденных тестов</h7>
-            <p style="position:relative; margin-top:30px">
-                <a href="~/Profile/Home" class="btn btn-primary btn-lg">Мой профиль</a>
-            </p>
-        </div>
+        if (user.Value != "AdilAdminBikeev1999h@mail.ru")
+        {
+            <div class="line_block float">
+                <h2>Тесты</h2>
+                <h7>Желаете узнать насколько хорошо вы знаете тот или иной язык программирования ? Тогда жми кнопку ниже !</h7>
+                <p style="position:relative; margin-top:30px">
+                    <a href="~/Test/ListTest" class="btn btn-success btn-lg">Перейти к тестам</a>
+                </p>
+            </div>
+            <div class="line_block float">
+                <h2>Документация</h2>
+                <h7>На нашем сайте доступна удобная со всех сторон документация по 6-ти языкам программирвоания. Помимо этого вы можете изучить ту или иную востребованную технологию или ОС</h7>
+                <p style="position:relative; margin-top:30px">
+                    <a href="~/Documentation/Home" class="btn btn-warning btn-lg">Перейти к документации</a>
+                </p>
+            </div>
+            <div class="line_block float">
+                <h2>Профиль</h2>
+                <h7>На странице вашего профиля доступна вся необходимая информация в том числе и результаты пройденных тестов</h7>
+                <p style="position:relative; margin-top:30px">
+                    <a href="~/Profile/Home" class="btn btn-primary btn-lg">Мой профиль</a>
+                </p>
+            </div>
+        }
+        else
+        {
+            <div class="line_block float">
+                <h2>Тесты</h2>
+                <h7>Желаете отредактирвоать существующие тесты ? Тогда жми кнопку ниже !</h7>
+                <p style="position:relative; margin-top:30px">
+                    <a href="~/Test/ListTest" class="btn btn-success btn-lg">Перейти к тестам</a>
+                </p>
+            </div>
+        }
     }
 }
-
-
 
 

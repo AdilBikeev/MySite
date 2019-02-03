@@ -1,9 +1,7 @@
 ﻿@model MySite.Models.Users
 
 @{
-                /**/
-
-                ViewBag.Title = "Home";
+                ViewBag.Title = "Профиль";
                 Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,7 +18,7 @@
             </div>
         </div>
     </div>
-    
+
     <hr />
     <div class="container">
         <div class="row">
@@ -28,38 +26,37 @@
                 <div class="card mb-4 box-shadow">
                     <b>Имя</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.Name) <br />
                     <b>Фамилия</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.Surname) <br />
-                    <b>Дата рождения</b>&nbsp;&nbsp;&nbsp;@Model.DateBirthDay.ToLongDateString() <br />
+                    <b>Дата рождения</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.DateBirthDay) <br />
                     <b>Email</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.Email)
-
                     <!--Обновление страницы профиля, добавлена информация: имя, фамиля, дата рождения, о себе-->
-
                     @Html.ActionLink("Выйти", "Exit", "Profile", null, new { @class = "btn btn-primary btn-lg" })
                 </div>
             </div>
-            
-        </div>
 
+        </div>
         <hr />
         <div class="row">
             <div class="col-md-12">
-                    <b>О себе</b><br />
-                    @Html.DisplayFor(x=>x.AboutOneself)
+                <b>О себе</b><br />
+                @Html.DisplayFor(x => x.AboutOneself)
             </div>
         </div>
         <hr />
-
     </div>
     <b>Пройденные тесты</b>
     <ul>
-        <li>
-            <i>C# &nbsp;&nbsp;&nbsp;&nbsp;</i>
-            <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@Model.Sharp%"
-                     aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </li>
+        @Html.Raw(ViewBag.Html)
     </ul>
+    <hr />
+    @if (Request.Cookies["User"].Value != "admin@mail.ru")//если пользователь не админ
+    {//предоставляем возможность удалять аккаунт
+        <a href="~/Profile/Delete" class="btn btn-danger btn-lg">Удалить аккаунт</a>
+    }
 </div>
+    }
+    else
+    {
+        <h1>Данная страница доступная для авторизованных пользователей</h1>
     }
 }
 

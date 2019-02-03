@@ -1,35 +1,64 @@
 ﻿@model MySite.Models.Users
-
 @{
-    ViewBag.Title = "Registration";
+    ViewBag.Title = "Регистрация";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 
 <h2>Регистраиця</h2>
 <div>
     @using (Html.BeginForm("Registration", "Home", new { user = Model }))
     {
-        @Html.ValidationSummary()
+        @Html.TextBoxFor(x => x.Name, new { style = "display:none", data_val = "false" })
+        @Html.TextBoxFor(x => x.Surname, new { style = "display:none", data_val = "false" })
+        @Html.TextBoxFor(x => x.DateBirthDay, new { style = "display:none", data_val = "false" })
+        @Html.TextBoxFor(x => x.AboutOneself, new { style = "display:none", data_val = "false" })
+
+
+
+        if (ViewBag.Msg != null)//Если есть сообщение
+        {//выводим его
+            <b style="color:red">@ViewBag.Msg</b>
+            <hr />
+        }
+
         <table>
             <tr>
                 <td>Login</td>
-                <td> @Html.TextBoxFor(x => x.Login)</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Login)
+                    @Html.ValidationMessageFor(x => x.Login)
+                </td>
+
             </tr>
             <tr>
                 <td>Password &nbsp;</td>
-                <td> @Html.TextBoxFor(x => x.Password)</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Password, new { type = "password" })
+                    @Html.ValidationMessageFor(x => x.Password)
+                </td>
+            </tr>
+            <tr>
+                <td>Try Password &nbsp;</td>
+                <td>
+                    @Html.TextBoxFor(x => x.PasswordConfirm, new { type = "password" })
+                    @Html.ValidationMessageFor(x => x.PasswordConfirm)
+                </td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td> @Html.TextBoxFor(x => x.Email)</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Email)
+                    @Html.ValidationMessageFor(x => x.Email)
+                </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <input class="btn btn-primary btn-lg" type="submit" value="Зарегестрироваться"/>
+                    <input class="btn btn-primary btn-lg" type="submit" value="Зарегестрироваться" />
                 </td>
             </tr>
         </table>
     }
 </div>
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Home/Registration/RegistrationValidation.js"></script>
+}

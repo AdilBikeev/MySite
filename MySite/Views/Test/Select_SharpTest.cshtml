@@ -1,93 +1,97 @@
 ﻿
 @{
-    ViewBag.Title = "Select_SharpTest";
+    ViewBag.Title = "Тест по C#";
     Layout = "~/Views/Shared/_LayoutTest.cshtml";
 }
 
+@if (Request.Cookies["User"] != null)//если пользователь авторизован
+{
+    <div class="jumbotron">
+        <div class="gb-test-page__left test-control">
+            <div class="container footer-stick">
+                @using (Html.BeginForm("Result", "Test", new { SelectedTest = "Sharp" }))
+                {
+                    Html.AntiForgeryToken();
+                    <!--1 вопрос-->
+                    <div class="onetest" name="onetest">
+                        <font color="#000099" size="4">
+                            <b>
+                                Вопрос № 1
+                            </b>
+                        </font>
+                        <br>
+                        <font color="#333333" size="3">
+                            <p>  Какие из перечисленных типов данных относятся к целочисленным? </p>
+                        </font>
+                        <div class="otv" id="torf1">
+                        </div>
+                        <div class="form-check">
+                            <input class="custom-control-input" type="radio" name="quest1" id="exampleRadios1" value="1" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                float
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="custom-control-input" type="radio" name="quest1" id="exampleRadios2" value="2">
+                            <label class="form-check-label" for="exampleRadios2">
+                                int
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="quest1" id="exampleRadios3" value="3">
+                            <label class="form-check-label" for="exampleRadios3">
+                                double
+                            </label>
+                        </div>
+                    </div>
 
-<div class="jumbotron">
-    <div class="gb-test-page__left test-control">
-        <div class="container footer-stick">
-            @using (Html.BeginForm("Result", "Test", new { SelectedTest = "Sharp" }))
-            {
-                <!--1 вопрос-->
-                <div class="onetest" name="onetest">
-                    <font color="#000099" size="4">
-                        <b>
-                            Вопрос № 1
-                        </b>
-                    </font>
-                    <br>
-                    <font color="#333333" size="3">
-                        <p>  Какие из перечисленных типов данных относятся к целочисленным? </p>
-                    </font>
-                    <div class="otv" id="torf1">
+                    <!--2 вопрос-->
+                    <div class="onetest" name="onetest">
+                        <font color="#000099" size="4">
+                            <b>
+                                Вопрос № 2
+                            </b>
+                        </font><br>
+                        <font color="#333333" size="3">
+                            <p> Укажите неверное утверждение ... </p>
+                        </font>
+                        <div class="otv" id="torf1">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="quest2" id="exampleRadios1" value="1" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Процедура в C# не должна возвращать значение процедуры
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="quest2" id="exampleRadios3" value="2">
+                            <label class="form-check-label" for="exampleRadios3">
+                                Локальная переменная действует только вне подпрограммы
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="quest2" id="exampleRadios3" value="3">
+                            <label class="form-check-label" for="exampleRadios3">
+                                Функция в C# должна возвращать значение функции
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="quest2" id="exampleRadios3" value="4">
+                            <label class="form-check-label" for="exampleRadios3">
+                                Переменная - это тип данных
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="custom-control-input" type="radio" name="quest1" id="exampleRadios1" value="1" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                            float
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="custom-control-input" type="radio" name="quest1" id="exampleRadios2" value="2">
-                        <label class="form-check-label" for="exampleRadios2">
-                            int
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="quest1" id="exampleRadios3" value="3">
-                        <label class="form-check-label" for="exampleRadios3">
-                            double
-                        </label>
-                    </div>
-                </div>
 
-                <!--2 вопрос-->
-                <div class="onetest" name="onetest">
-                    <font color="#000099" size="4">
-                        <b>
-                            Вопрос № 2
-                        </b>
-                    </font><br>
-                    <font color="#333333" size="3">
-                        <p> Укажите неверное утверждение ... </p>
-                    </font>
-                    <div class="otv" id="torf1">
+                    <div>
+                        <input class="btn btn-success" type="submit" value="Проверить результат">
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="quest2" id="exampleRadios1" value="1" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                            Процедура в C# не должна возвращать значение процедуры
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="quest2" id="exampleRadios3" value="2">
-                        <label class="form-check-label" for="exampleRadios3">
-                            Локальная переменная действует только вне подпрограммы
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="quest2" id="exampleRadios3" value="3">
-                        <label class="form-check-label" for="exampleRadios3">
-                            Функция в C# должна возвращать значение функции
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="quest2" id="exampleRadios3" value="4">
-                        <label class="form-check-label" for="exampleRadios3">
-                           Переменная - это тип данных
-                        </label>
-                    </div>
-                </div>
-
-                <div>
-                    <input class="btn btn-success" type="submit" value="Проверить результат">
-                </div>
-            }
+                }
             </div>
+        </div>
     </div>
-</div>
-@*
-    1) обработать событие отправки данных в форму и вывод результата тестирования
-*@
+}
+else
+{
+    <h1>Доступ к данной странице имеют только авторизованные пользователи</h1>
+}

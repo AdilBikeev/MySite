@@ -155,7 +155,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CipherData\Cipher.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -163,28 +165,49 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Sharp.cs">
-      <DependentUpon>Users.tt</DependentUpon>
+    <Compile Include="Models\Answer_Choice.cs">
+      <DependentUpon>SiteDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Users.Context.cs">
+    <Compile Include="Models\NameTest.cs">
+      <DependentUpon>SiteDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Questions.cs">
+      <DependentUpon>SiteDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Result_Test.cs">
+      <DependentUpon>SiteDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Users.Context.tt</DependentUpon>
+      <DependentUpon>SiteDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Test.cs">
+      <DependentUpon>SiteDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Users.cs">
-      <DependentUpon>Users.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Site.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Site.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Users1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Users.tt</DependentUpon>
+      <DependentUpon>SiteDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="WebService\ExchangeRate.asmx.cs">
+      <DependentUpon>ExchangeRate.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\SiteDb.mdf" />
@@ -195,6 +218,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Error\ErrorCss.css" />
     <Content Include="Content\Images\Documentation\C.svg.png" />
     <Content Include="Content\Images\Documentation\Carusel\1.jpg" />
     <Content Include="Content\Images\Documentation\Carusel\2.jpg" />
@@ -204,33 +228,44 @@
     <Content Include="Content\Images\Documentation\Java.png" />
     <Content Include="Content\Images\Documentation\JavaScript.png" />
     <Content Include="Content\Images\Documentation\Python.png.jpg" />
+    <Content Include="Content\Images\Error\asp.net-mvc.jpg" />
+    <Content Include="Content\Images\Error\c4-1440x564_c.jpg" />
+    <Content Include="Content\Images\Shared\_Layout\EUR.png" />
+    <Content Include="Content\Images\Shared\_Layout\USD.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Users.Context.tt">
+    <Content Include="Models\SiteDb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Users.Context.cs</LastGenOutput>
-      <DependentUpon>Site.edmx</DependentUpon>
+      <DependentUpon>SiteDb.edmx</DependentUpon>
+      <LastGenOutput>SiteDb.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Users.tt">
+    <Content Include="Models\SiteDb.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Site.edmx</DependentUpon>
-      <LastGenOutput>Users1.cs</LastGenOutput>
+      <DependentUpon>SiteDb.edmx</DependentUpon>
+      <LastGenOutput>SiteDb.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\Site.edmx">
+    <Content Include="Scripts\Test\EditTest\Add_or_Remve_Test.js" />
+    <Content Include="WebService\ExchangeRate.asmx" />
+    <EntityDeploy Include="Models\SiteDb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Site.Designer.cs</LastGenOutput>
+      <LastGenOutput>SiteDb.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Site.edmx.diagram">
-      <DependentUpon>Site.edmx</DependentUpon>
+    <Content Include="Models\SiteDb.edmx.diagram">
+      <DependentUpon>SiteDb.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Home\Registration\RegistrationValidation.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -241,6 +276,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Profile\Edit\AntiValid.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -250,7 +286,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LayoutError.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -260,12 +296,18 @@
     <Content Include="Views\Profile\Home.cshtml" />
     <Content Include="Views\Test\ListTest.cshtml" />
     <Content Include="Views\Shared\_LayoutTest.cshtml" />
-    <Content Include="Views\Test\Select_SharpTest.cshtml" />
+    <Content Include="Views\Test\SelectTest.cshtml" />
     <Content Include="Views\Test\Result.cshtml" />
     <Content Include="Views\Documentation\Home.cshtml" />
     <Content Include="Views\Shared\_LayoutDocumentation.cshtml" />
     <Content Include="Views\Documentation\Sharp.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\Delete.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Test\EditTest.cshtml" />
+    <Content Include="Views\Test\AddQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

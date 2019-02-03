@@ -1,0 +1,20 @@
+﻿body {
+    background: url('../../Content/Images/Error/c4-1440x564_c.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.bg-width-max {
+    width: 100%;
+}
+
+.bg-height-maxs {
+    height: 100%;
+}
+
+.bg-error {
+    border: 5px dashed orange;
+    border-radius:30px;
+    background-color:indianred;
+    padding:50px;
+    width:50%;
+}
