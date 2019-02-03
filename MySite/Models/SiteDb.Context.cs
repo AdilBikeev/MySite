@@ -26,10 +26,5 @@ namespace MySite.Models
         }
     
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Answer_Choice> Answer_Choice { get; set; }
-        public virtual DbSet<NameTest> NameTest { get; set; }
-        public virtual DbSet<Questions> Questions { get; set; }
-        public virtual DbSet<Test> Test { get; set; }
-        public virtual DbSet<Result_Test> Result_Test { get; set; }
     }
 }

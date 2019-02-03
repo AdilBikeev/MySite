@@ -164,18 +164,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Answer_Choice.cs">
-      <DependentUpon>SiteDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NameTest.cs">
-      <DependentUpon>SiteDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Questions.cs">
-      <DependentUpon>SiteDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Result_Test.cs">
-      <DependentUpon>SiteDb.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SiteDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -190,9 +178,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteDb.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Test.cs">
-      <DependentUpon>SiteDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Users.cs">
       <DependentUpon>SiteDb.tt</DependentUpon>
