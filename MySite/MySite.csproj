@@ -155,13 +155,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Captcha_Image\CaptchaImage.cs" />
     <Compile Include="CipherData\Cipher.cs" />
-    <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -294,20 +293,11 @@
     <Content Include="Views\Home\Thanks.cshtml" />
     <Content Include="Views\LogIn\Autorization.cshtml" />
     <Content Include="Views\Profile\Home.cshtml" />
-    <Content Include="Views\Test\ListTest.cshtml" />
-    <Content Include="Views\Shared\_LayoutTest.cshtml" />
-    <Content Include="Views\Test\SelectTest.cshtml" />
-    <Content Include="Views\Test\Result.cshtml" />
-    <Content Include="Views\Documentation\Home.cshtml" />
-    <Content Include="Views\Shared\_LayoutDocumentation.cshtml" />
-    <Content Include="Views\Documentation\Sharp.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\Delete.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
     <Content Include="Views\Error\ServerError.cshtml" />
-    <Content Include="Views\Test\EditTest.cshtml" />
-    <Content Include="Views\Test\AddQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -24,8 +24,6 @@
                     </li>
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                 </ul>
-                @Html.ActionLink("Тест", "ListTest", "Test", new { area = "" }, new { @class = "btn btn-success btn-lg" })
-                @Html.ActionLink("Документация", "Home", "Documentation", new { area = "" }, new { @class = "btn btn-danger btn-lg" })
                 @{
                     var user = Request.Cookies["User"];
                     if (user != null)

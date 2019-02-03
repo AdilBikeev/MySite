@@ -21,42 +21,56 @@
             <hr />
         }
 
-        <table>
-            <tr>
-                <td>Login</td>
-                <td>
-                    @Html.TextBoxFor(x => x.Login)
-                    @Html.ValidationMessageFor(x => x.Login)
-                </td>
+            <table>
+                <tr>
+                    <td>Login</td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Login)
+                        @Html.ValidationMessageFor(x => x.Login)
+                    </td>
 
-            </tr>
-            <tr>
-                <td>Password &nbsp;</td>
-                <td>
-                    @Html.TextBoxFor(x => x.Password, new { type = "password" })
-                    @Html.ValidationMessageFor(x => x.Password)
-                </td>
-            </tr>
-            <tr>
-                <td>Try Password &nbsp;</td>
-                <td>
-                    @Html.TextBoxFor(x => x.PasswordConfirm, new { type = "password" })
-                    @Html.ValidationMessageFor(x => x.PasswordConfirm)
-                </td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>
-                    @Html.TextBoxFor(x => x.Email)
-                    @Html.ValidationMessageFor(x => x.Email)
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input class="btn btn-primary btn-lg" type="submit" value="Зарегестрироваться" />
-                </td>
-            </tr>
-        </table>
+                </tr>
+                <tr>
+                    <td>Password &nbsp;</td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Password, new { type = "password" })
+                        @Html.ValidationMessageFor(x => x.Password)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Try Password &nbsp;</td>
+                    <td>
+                        @Html.TextBoxFor(x => x.PasswordConfirm, new { type = "password" })
+                        @Html.ValidationMessageFor(x => x.PasswordConfirm)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Email)
+                        @Html.ValidationMessageFor(x => x.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        Введите код с картинки &nbsp;
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <img src='@Url.Action("Captcha", "Home")' alt='captcha' />
+                        <br />
+                        <input id="captcha" name="captcha" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input class="btn btn-primary btn-lg" type="submit" value="Зарегестрироваться" />
+                    </td>
+                </tr>
+            </table>
     }
 </div>
 @section scripts{
