@@ -1,4 +1,4 @@
-﻿@model string
+﻿
 
 
 @{
@@ -6,12 +6,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model</h2><br /><br />
+<h2>@ViewBag.Msg</h2><br /><br />
 
 @{
-    if (Model != "Регистрация пройдена успешно !")//если регистрация не прошла успешно
+    if (ViewBag.Msg != "Регистрация пройдена успешно !")//если регистрация не прошла успешно
     {
-        <a class="btn btn-primary btn-lg" href="~/Home/Registration">Вернуться на страницу регистраци</a>
+        <a class="btn btn-primary btn-lg" href="~/Home/Registration">Вернуться на странциу регистрации</a>
     }
     else//при успешной регистрации
     {

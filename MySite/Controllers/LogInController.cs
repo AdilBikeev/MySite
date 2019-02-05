@@ -25,20 +25,24 @@ namespace MySite.Controllers
         {
             try
             {
-                db.Users.Load();
-                foreach(Users item in db.Users.Local)
-                {
-                    if(item.Password == Cipher.GetMD5Hach(user.Password)&&item.Login == Cipher.GetMD5Hach(user.Login))//расшифровываем даныне из БД и сверяем данные с веденными пользоватеем
+                string code = Request.Form["captcha"];
+                if (code != String.Empty && code == Session["code"].ToString())
+                {//если каптчка введена верно
+                    db.Users.Load();
+                    foreach (Users item in db.Users.Local)
                     {
-                        ViewBag.Msg = "";
-                        HttpCookie cookie = new HttpCookie("User");//в качестве cooki запоминаем эмаил пользователя
-                        cookie.Expires = DateTime.Now.AddDays(31);
-                        cookie.Value = item.Email;//сохраняем в куки уже зашифрованный email
-                        Response.Cookies.Add(cookie);
-                        return RedirectToAction("Index","Home");//возвращаемся к домашней странцие
+                        if (item.Password == Cipher.GetMD5Hach(user.Password) && item.Login == Cipher.GetMD5Hach(user.Login))//расшифровываем даныне из БД и сверяем данные с веденными пользоватеем
+                        {
+                            ViewBag.Msg = "";
+                            HttpCookie cookie = new HttpCookie("User");//в качестве cooki запоминаем эмаил пользователя
+                            cookie.Expires = DateTime.Now.AddDays(31);
+                            cookie.Value = item.Email;//сохраняем в куки уже зашифрованный email
+                            Response.Cookies.Add(cookie);
+                            return RedirectToAction("Index", "Home");//возвращаемся к домашней странцие
+                        }
                     }
+                    throw new Exception("Неверный логин или пароль");
                 }
-                throw new Exception("Неверный логин или пароль");
             }
             catch (Exception exc)
             {

@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section LeftDiv{
+    <h2>Оформление заказа</h2>
+    <h4 class="alert-danger">@ViewBag.Msg</h4>
+    @using (Html.BeginForm("SendMsg", "Order"))
+    {
+    <table>
+        <tr>
+            <td>Ссылка на страницу в ВК</td>
+            <td>
+                <input name="linkVK" type="text" style="width:500px">
+            </td>
+            
+        </tr>
+        <tr>
+            <td>Название предмета</td>
+            <td>
+                <input name="subject" type="text" style="width:500px">
+            </td>
+        </tr>
+        <tr>
+            <td>Дедлайн заказа</td>
+            <td>
+                <input name="time" type="text" style="width:500px" placeholder="Формат: 'день-месяц'">
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="3">
+                <textarea name="requirements" placeholder="Требования к заказу" style="width:500px"></textarea>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-success btn-round">Отправить</button>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    }
+}
+
+
+
+
+
+
+

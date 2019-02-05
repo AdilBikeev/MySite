@@ -77,14 +77,16 @@ namespace MySite.Controllers
                         #endregion
                         dbSite.Users.Add(user);//добавляем новго пользователя в БД
                         dbSite.SaveChanges();//слхраняем изменения
-                        return View("Thanks", (object)"Регистрация пройдена успешно !");
+                        ViewBag.Msg = "Регистрация пройдена успешно !";
+                        return View("Thanks");
                     }
                 }
                 ViewBag.Msg = "Неверно заполнены поля ввода";
                 return View();
             }catch(Exception exc)
             {
-                return View("Thanks", (object)exc.Message);
+                ViewBag.Msg = exc.Message;
+                return View("Thanks");
             }
         }
     }

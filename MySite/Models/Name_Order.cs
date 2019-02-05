@@ -11,10 +11,13 @@ namespace MySite.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Sharp
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class Name_Order
     {
         public int Id { get; set; }
-        public int numAnswer { get; set; }
+
+        [RegularExpression("^[а-яА-ЯёЁa-zA-Z0-9]+$", ErrorMessage = "*Имя может состоять только из букв и цифр")]
+        public string Name { get; set; }
     }
 }

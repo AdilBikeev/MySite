@@ -26,5 +26,7 @@ namespace MySite.Models
         }
     
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Name_Order> Name_Order { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
     }
 }

@@ -32,6 +32,9 @@
                         if (user.Value != "AdilAdminBikeev1999h@mail.ru")
                         {
                             <label style="float:right">
+                                @Html.ActionLink("Список заказов", "ListOrder", "Order", null, new { @class = "btn btn-danger btn-lg" })
+                            </label>
+                            <label style="float:right">
                                 @Html.ActionLink("Мой профиль", "Home", "Profile", null, new { @class = "btn btn-primary btn-lg" })
                             </label>
                             <label class="navbar-brand" style="float:right">@user.Value</label>
@@ -53,17 +56,18 @@
         </div>
     </div>
     <div class="container-fluid">
+        @RenderSection("table", required: false);
         <!--Левый div-->
         <div class="col-sm-3">
             @RenderSection("LeftDiv", required: false);
         </div>
-        
+
 
         <!--Централый div-->
         <div class="col-sm-6">
             @RenderBody()
         </div>
-
+        @*
         <!--Правый div-->
         <div class="col-sm-3">
             @using MySite.WebService
@@ -103,9 +107,9 @@
                     </ul>
                 </div>
             </div>
-            
 
-           
+
+
             <br />
             <br />
             <br />
@@ -113,7 +117,7 @@
 
             <!--Баннер для рекламы-->
             <img width="200" height="400" alt="Advertisement" src="http://rf24.org/nov2/schoolm/images/_index_78f2db9d077f4e7141711e6d9455ab43_4012_.jpg" border="0">
-        </div>
+        </div>*@
     </div>
     <div class="container body-content">
         <hr />

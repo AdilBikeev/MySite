@@ -18,26 +18,39 @@
     @Html.TextBoxFor(x =>x.Surname,new { style = "display:none",  data_val = "false"  })
     @Html.TextBoxFor(x =>x.DateBirthDay,new { style = "display:none",  data_val = "false"  })
     @Html.TextBoxFor(x =>x.AboutOneself,new { style = "display:none",  data_val = "false"  })
-    <table>
-        <tr>
-            <td>Login</td>
-            <td>
-                @Html.TextBoxFor(x => x.Login)
-                @Html.ValidationMessageFor(x => x.Login)
-            </td>
-        </tr>
-        <tr>
-            <td>Password &nbsp;</td>
-            <td>
-                @Html.TextBoxFor(x => x.Password, new { type = "password"})
-                @Html.ValidationMessageFor(x => x.Password)
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input class="btn btn-primary btn-lg" style="margin-top:20px" type="submit" value="Войти" />
-            </td>
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <td>Login</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Login)
+                    @Html.ValidationMessageFor(x => x.Login)
+                </td>
+            </tr>
+            <tr>
+                <td>Password &nbsp;</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Password, new { type = "password" })
+                    @Html.ValidationMessageFor(x => x.Password)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                    Введите код с картинки &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src='@Url.Action("Captcha", "Home")' alt='captcha' />
+                    <br />
+                    <input id="captcha" name="captcha" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input class="btn btn-primary btn-lg" style="margin-top:20px" type="submit" value="Войти" />
+                </td>
+            </tr>
+        </table>
 
 }

@@ -160,9 +160,16 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Name_Order.cs">
+      <DependentUpon>SiteDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.cs">
+      <DependentUpon>SiteDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SiteDb.Context.cs">
       <AutoGen>True</AutoGen>
@@ -194,10 +201,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\SiteDb.mdf" />
-    <Content Include="App_Data\SiteDb_log.ldf">
-      <DependentUpon>SiteDb.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -225,6 +228,7 @@
       <DependentUpon>SiteDb.edmx</DependentUpon>
       <LastGenOutput>SiteDb.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\SiteDb.edmx.sql" />
     <Content Include="Models\SiteDb.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SiteDb.edmx</DependentUpon>
@@ -283,8 +287,13 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
     <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\Order\Thanks.cshtml" />
+    <Content Include="Views\Order\ListOrder.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
