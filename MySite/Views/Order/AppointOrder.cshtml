@@ -1,0 +1,42 @@
+﻿@model MySite.Models.Orders
+@{
+
+    ViewBag.Title = "AppointOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section LeftDiv{
+    <h2>Назначение заказа</h2>
+    <h4 class="alert-danger">@ViewBag.Msg</h4>
+    @using (Html.BeginForm("AppointOrder", "Order", Model))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <tr>
+                <td>Полная стоимость</td>
+                <td>
+                    @Html.EditorFor(x => x.Salary_full)
+                </td>
+
+            </tr>
+            <tr>
+                <td>ЗП рабочего</td>
+                <td>
+                    @Html.EditorFor(x => x.Salary_workman)
+                </td>
+            </tr>
+            <tr>
+                <td>Почта рабочего</td>
+                <td>
+                    @Html.EditorFor(x => x.Workman)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" class="btn btn-success btn-round">Назначить</button>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    }
+}

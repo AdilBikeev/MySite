@@ -15,7 +15,16 @@
 <div class="col‐xs‐12 col‐md‐8">
     <div class="fresh-table toolbar-color-blue left">
 
-        <h4>@ViewBag.Msg</h4>
+        @if (ViewBag.Msg == "Произошла ошибка базового поставщика в Open.")
+        {
+            <h4>Ошибка при загрузке данных с сервера - перезапустите страницу</h4>
+        }
+        else
+        {
+            <h4>
+                @ViewBag.Msg
+            </h4>
+        }
 
         <table id="fresh-table" class="table">
             <thead>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/05/2019 23:58:57
+-- Date Created: 02/06/2019 02:08:00
 -- Generated from EDMX file: D:\ЯП\C#\Мои проекты\MySite Entity Framework\MySite\Models\SiteDb.edmx
 -- --------------------------------------------------
 
@@ -27,6 +27,9 @@ IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Name_Order]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Name_Order];
+GO
+IF OBJECT_ID(N'[dbo].[Orders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Orders];
 GO
 
 -- --------------------------------------------------

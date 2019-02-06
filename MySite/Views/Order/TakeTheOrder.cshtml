@@ -1,0 +1,43 @@
+﻿@model MySite.Models.Orders
+@{
+    ViewBag.Title = "TakeTheOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Заявка на получение заказа</h2>
+<h4>@ViewBag.Msg</h4>
+@section LeftDiv{
+    <h4 class="alert-danger">@ViewBag.Msg</h4>
+    @using (Html.BeginForm("TakeTheOrder", "Order"))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <tr>
+                <td>ID заказа</td>
+                <td>
+                    @Html.DisplayFor(x => x.Id)
+                </td>
+
+            </tr>
+            <tr>
+                <td>ЗП рабочего</td>
+                <td>
+                    @Html.DisplayFor(x => x.Salary_workman)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <textarea name="msg" placeholder="Ваше сообщение" style="width:500px"></textarea>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" class="btn btn-success btn-round">Отправить заявку</button>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    }
+}

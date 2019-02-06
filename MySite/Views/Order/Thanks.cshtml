@@ -9,12 +9,5 @@
 <h2>@ViewBag.Msg</h2><br /><br />
 
 @{
-    if (ViewBag.Msg == "Заказ успешно оформлен. Вам в скором времени отпишут либо на странциу в ВК, либо на вашу почту, указанную при регистрации")//если регистрация не прошла успешно
-    {
-        <a class="btn btn-primary btn-lg" href="~/Order/Create">Сделать ещё заказ</a>
-    }
-    else//при ошибки заказа
-    {
-        <a class="btn btn-primary btn-lg" href="~/Order/Thanks">Вернуться</a>
-    }
+        <a class="btn btn-primary btn-lg" href="~/Home/Index">На главную страницу</a>
 }
