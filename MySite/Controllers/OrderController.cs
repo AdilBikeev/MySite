@@ -269,7 +269,7 @@ namespace MySite.Controllers
             siteDb.Orders.Load();
             string info = siteDb.Orders.First(x => x.Id == ID).About_Order;
             string email = Request.Cookies["User"].Value;
-            if(email != "admin@mail.ru")
+            if(email != "admin@mail.ru" && siteDb.Orders.First(x => x.Id == ID).Workman != email)//если пользователь не имеет отношения к заказу
             {
                 int index = info.IndexOf("Ссылка на страницу в ВК");
                 if(index != -1)
@@ -300,8 +300,11 @@ namespace MySite.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult AppointOrder(Orders orders)
+        public async Task<ActionResult> AppointOrder(Orders orders)
         {
+            string info = orders.About_Order;
+            int index = info.IndexOf("Ссылка на страницу в ВК");
+            info = info.Remove(0, index);
             try
             {
                 siteDb.Orders.Load();
@@ -309,6 +312,16 @@ namespace MySite.Controllers
                 siteDb.Orders.First(x => x.Id == orders.Id).Salary_workman = orders.Salary_workman;
                 siteDb.Orders.First(x => x.Id == orders.Id).Workman = orders.Workman;
                 siteDb.Orders.First(x => x.Id == orders.Id).Status = "Активен";
+
+                EmailService emailService = new EmailService();
+                await emailService.SendEmailAsync(orders.Workman, "Заявка на получение заказа на сайте it-learning", "Ваша заявка одобрена" +
+                    "<br/>\'ID заказа: " + orders.Id + "\'" +
+                    "<br/>\'Ваша ЗП за выполненный заказ: " + orders.Salary_workman + "\'" +
+                    "<br/>\'Ваш email: " + orders.Workman + "\'" +
+                    "<br/>\'" + info + "\'" +
+                    "<br/> Если этой информации было вам недостаточно, то вы всегда можете посетить страницу <a href = \"http://localhost:4490/Order/ListOrder\">список заказов</a> и узнать подробности заказа." +
+                    "или же вы можете написать нам на почту itlearning2020@gmail.com . " +
+                    "<br/><b>Обязательно</b> после выполнения заказа - сообщить об этом админисрацию ! При невыполнении условий договорра - ваше взаимодействие с нами будет прекращено навсегда.");
 
                 siteDb.SaveChanges();
             }
