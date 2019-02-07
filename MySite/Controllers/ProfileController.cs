@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MySite.Models;
 using MySite.CipherData;
+using MySite.WebService;
 
 namespace MySite.Controllers
 {
@@ -20,14 +21,15 @@ namespace MySite.Controllers
         {
             try
             {
-                if (Request.Cookies["user"] != null)//если пользователь авторизован на странице
+                if (Request.Cookies["user"] != null && Request.Cookies["__sc1_592658302759876"] != null)//если пользователь авторизован на странице
                 {
                     
                     siteDb.Users.Load();//загрыжаем данные о пользователях из БД
                     string email = Request.Cookies["user"].Value;
+                    string token = Request.Cookies["__sc1_592658302759876"].Value;
                     string html = string.Empty;
                     Users user = null;
-                    if (email == "admin@mail.ru")//если пользователь - админ
+                    if (email == "admin@mail.ru" && VerificationService.isAdmin(token) )//если пользователь - админ
                     {
                         html += "<b>Список пользователей сайта</b><ul>";
                         siteDb.Users.Load();
@@ -50,73 +52,6 @@ namespace MySite.Controllers
                     }
                     ViewBag.Html = html;
                     return View(user);
-                    /*
-                    List<Result_Test> testsComplete = null;
-                    Users user = null;
-
-                    if (email != "admin@mail.ru")
-                    {//если пользователь не админ
-                        
-                        user = siteDb.Users.First(x => x.Email == email);//находим в БД плзователя с указанным в куки Email
-                        
-                        siteDb.Result_Test.Load();
-                        testsComplete = (from item in siteDb.Result_Test
-                                                           where item.ID_Users == user.Id//находим все данные о пройденных тестах
-                                                           select item).ToList();
-
-                        if (testsComplete.Count != 0)//если пользоватлеь проходил хотяб 1 тест
-                        {
-                            siteDb.NameTest.Load();
-                            foreach (Result_Test item in testsComplete)//пробегаемся по всем пройденным тестам
-                            {
-                                html += "<li>" +
-                                            "<i>" + siteDb.NameTest.First(x => x.Id == item.ID_NameTest).name_test + "&nbsp;&nbsp;&nbsp;&nbsp;</i>" +
-                                            "<div class=\"progress\">" +
-                                                "<div class=\"progress-bar progress-bar-success progress-bar-striped\" role=\"progressbar\" style=\"width:" + item.Result + "%\"" +
-                                                " aria-valuemin=\"0\" aria-valuemax=\"100\"></div>" +
-                                            "<div>" +
-                                        "</li>";
-                            }
-                        }
-                        else
-                        {
-                            html += "<h4>Вы не прошли ни одного теста</h4>";
-                        }
-                        return View(user);
-                    }
-                    else
-                    {
-                        siteDb.Result_Test.Load();
-                        foreach (Users userItem in siteDb.Users.Local)//пробегаемся по всем пользователям
-                        {
-                            testsComplete = (from item in siteDb.Result_Test
-                                                where item.ID_Users == userItem.Id//находим все данные о пройденных тестах
-                                                select item).ToList();
-
-                            if (testsComplete.Count != 0)//если пользоватлеь проходил хотяб 1 тест
-                            {
-                                siteDb.NameTest.Load();
-                                foreach (Result_Test item in testsComplete)//пробегаемся по всем пройденным тестам
-                                {
-                                    html += "<li>" +
-                                                "<i>" + userItem.Email+ "&nbsp&nbsp&nbsp&nbsp" +  siteDb.NameTest.First(x => x.Id == item.ID_NameTest).name_test + "&nbsp;&nbsp;&nbsp;&nbsp;</i>" +
-                                                "<div class=\"progress\">" +
-                                                    "<div class=\"progress-bar progress-bar-success progress-bar-striped\" role=\"progressbar\" style=\"width:" + item.Result + "%\"" +
-                                                    " aria-valuemin=\"0\" aria-valuemax=\"100\"></div>" +
-                                                "<div>" +
-                                            "</li>";
-                                }
-                            }
-                            else
-                            {
-                                html += "<li>" +
-                                                "<i>" + userItem.Email + "&nbsp;&nbsp;&nbsp;&nbsp; - пользователь ещё не прошел  ни один тест</i>" +  
-                                        "</li>";
-                            }
-                        }
-                    }
-                    ViewBag.Html = html;
-                    return View(user);*/
                 }
                 else
                 {
@@ -128,7 +63,6 @@ namespace MySite.Controllers
                 ViewBag.Msg = exc.Message;
                 return View("Error");
             }
-            return View();
         }
 
         [HttpGet]
@@ -138,17 +72,23 @@ namespace MySite.Controllers
 
             try
             {
-                siteDb.Users.Load();
-                string Email = Request.Cookies["User"].Value;
-                Users user = siteDb.Users.Local.First(x => x.Email == Email);
+                if (Request.Form["email"] != null && Request.Cookies["__sc1_592658302759876"] != null)
+                {
+                    siteDb.Users.Load();
+                    string Email = Request.Cookies["User"].Value;
+                    Users user = siteDb.Users.Local.First(x => x.Email == Email);
 
-                return View(user);//возвращаем данные о пользователя для вставки их в поля ввода
+                    return View(user);//возвращаем данные о пользователя для вставки их в поля ввода
+                }
+                else
+                {
+                    throw new Exception("Данная странциа доступна только авторизованным пользователям");
+                }
             } catch(Exception exc)
             {
                 ViewBag.Msg = exc.Message;
+                return RedirectToAction("NotFound", "Error");
             }
-           
-            return View();
         }
 
         [HttpPost]
@@ -163,9 +103,7 @@ namespace MySite.Controllers
                     siteDb.Users.Load();//загружаем данные из БД
 
                     string Email = Request.Cookies["User"].Value;
-
                     Users newUser = siteDb.Users.First(x => x.Email == Email);
-
                     int index = siteDb.Users.Local.IndexOf(newUser);//находим индекс авторизованного пользователя в коллекции
 
                     //запоминание отредактированные данные о пользователе
@@ -175,21 +113,8 @@ namespace MySite.Controllers
                     siteDb.Users.Local[index].DateBirthDay = user.DateBirthDay;
                     siteDb.Users.Local[index].PasswordConfirm = siteDb.Users.Local[index].Password;
 
-                    try
-                    {
-                        siteDb.SaveChanges();//сохраняем измененияы
-                        throw new Exception("Изменения успешно сохранены !");
-                    }catch(DbEntityValidationException ex)
-                    {
-                        foreach (DbEntityValidationResult validationError in ex.EntityValidationErrors)
-                        {
-                            ViewBag.Msg += "Object: " + validationError.Entry.Entity.ToString();
-                            foreach (DbValidationError err in validationError.ValidationErrors)
-                            {
-                                ViewBag.Msg += err.ErrorMessage + "";
-                            }
-                        }
-                    }
+                    siteDb.SaveChanges();//сохраняем измененияы
+                    throw new Exception("Изменения успешно сохранены !");
                 }
                 else
                 {
@@ -205,7 +130,9 @@ namespace MySite.Controllers
         
         public ActionResult Exit()//выход из профиля
         {
-            Response.Cookies["User"].Expires = DateTime.Now.AddDays(-1);//удаляем данные из куки
+            //удаляем данные из куки
+            Response.Cookies["User"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies["__sc1_592658302759876"].Expires = DateTime.Now.AddDays(-1);
             return RedirectToAction("Autorization", "LogIn");
         }
         
@@ -229,6 +156,7 @@ namespace MySite.Controllers
                 siteDb.Users.Remove(delUser); //удаляем пользователя
                 siteDb.SaveChanges();//сохраняем изменения
                 Response.Cookies["User"].Expires = DateTime.Now.AddDays(-1);//удаляем данные из куки
+                Response.Cookies["__sc1_592658302759876"].Expires = DateTime.Now.AddDays(-1);
             }catch(Exception exc)
             {
                 msg = exc.Message;
@@ -247,7 +175,7 @@ namespace MySite.Controllers
         {
             try
             {
-                if (Request.Form["email"] != null)
+                if (Request.Form["email"] != null && Request.Cookies["__sc1_592658302759876"] != null)
                 {
                     string email = Request.Form["email"];//получаем
                     ViewBag.email = email;

@@ -1,12 +1,12 @@
 ﻿@model MySite.Models.Users
-
+@using MySite.WebService
 @{
                 ViewBag.Title = "Профиль";
                 Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @{
-    if (Request.Cookies["User"] != null)
+    if (Request.Cookies["User"] != null && Request.Cookies["__sc1_592658302759876"] != null)
     {
 <div class="jumbotron" style="background-color:#0ab14b;color:white">
     <div class="row">
@@ -45,28 +45,31 @@
     </div>
     @Html.Raw(ViewBag.Html)
     <hr />
-    @if (Request.Cookies["User"].Value != "admin@mail.ru")//если пользователь не админ
-    {//предоставляем возможность удалять аккаунт
+    @if (Request.Cookies["User"].Value != "admin@mail.ru")
+    {//если пользователь не админ
         <a href="~/Profile/Delete" class="btn btn-danger btn-lg">Удалить аккаунт</a>
+
     }
     else
-    {//если пользователь - админ
-     //предоставляем возможность удалять аккаунт
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <h4>Удаление пользователей с указанным Email</h4>
-                    @using (Html.BeginForm("DeleteSelected", "Profile", FormMethod.Post))
-                    {
-                        //сделать отображение поля ля удаления пользователя с указанным email
-                        <b>Email</b>
+    {
+        if (VerificationService.isAdmin(Request.Cookies["__sc1_592658302759876"].Value))
+        {//если пользователь админ
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <h4>Удаление пользователей с указанным Email</h4>
+                        @using (Html.BeginForm("DeleteSelected", "Profile", FormMethod.Post))
+                        {
+                            //сделать отображение поля ля удаления пользователя с указанным email
+                            <b>Email</b>
 
-                        <input type="text" name="email" id="email" style="color:black" />
-                        <input class="btn btn-danger btn-lg" style="margin-top:20px" type="submit" value="Удалить аккаунт" />
-                    }
+                            <input type="text" name="email" id="email" style="color:black" />
+                            <input class="btn btn-danger btn-lg" style="margin-top:20px" type="submit" value="Удалить аккаунт" />
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     }
 </div>
     }

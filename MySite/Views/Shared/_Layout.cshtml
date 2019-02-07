@@ -25,12 +25,12 @@
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                 </ul>
                 @{
-                    var user = Request.Cookies["User"];
-                    if (user != null)
-                    {//в случаи, если пользователь на странице уже авторизован
-                     //ссылка на странциу профиля авторизованного пользователя
-                        if (user.Value != "AdilAdminBikeev1999h@mail.ru")
-                        {
+                        var user = Request.Cookies["User"];
+                        if (user != null && Request.Cookies["__sc1_592658302759876"] != null)
+                        {//в случаи, если пользователь на странице уже авторизован
+                         //ссылка на странциу профиля авторизованного пользователя
+                                    if (user.Value != "AdilAdminBikeev1999h@mail.ru")
+                                    {
                             <label style="float:right">
                                 @Html.ActionLink("Список заказов", "ListOrder", "Order", null, new { @class = "btn btn-danger btn-lg" })
                             </label>

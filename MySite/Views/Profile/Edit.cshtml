@@ -3,7 +3,7 @@
     ViewBag.Title = "Редактирование";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (Request.Cookies["User"] != null)//если пользователь авторизован
+@if (Request.Cookies["User"] != null && Request.Cookies["__RequestVerificationToken"] != null)//если пользователь авторизован
 {
     <h2>Редактирование</h2>
     <hr />

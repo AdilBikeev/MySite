@@ -1,5 +1,7 @@
-﻿@{
+﻿@using MySite.WebService
+@{
     ViewBag.Title = "Домашняя страница";
+    
 }
 <div class="jumbotron" style="background-color:#716bd7; color:white">
     <h2>Добро пожаловать на наш сайт !</h2>
@@ -8,7 +10,8 @@
 </div>
 @{
     var user = Request.Cookies["User"];
-    if (user == null)
+    var token = Request.Cookies["__sc1_592658302759876"];
+    if (user == null || token == null)
     {//в случаи, если пользователь на странице еще не авторизован
         <div class="line_block float">
             <h2>Регистрация</h2>
@@ -34,7 +37,7 @@
     }
     else
     {
-        if (user.Value != "AdilAdminBikeev1999h@mail.ru")//для простых пользователй сайта
+        if (user.Value != "admin@mail.ru" && (!VerificationService.isAdmin(token.Value)) )//для простых пользователй сайта
         {
             <div class="line_block float">
                 <h2>Профиль</h2>

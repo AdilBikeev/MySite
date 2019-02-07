@@ -22,65 +22,78 @@ namespace MySite.Controllers
         }
 
         [HttpPost]
-        [ValidateInput(false)]
-        public ViewResult SendMsg()
+        [ValidateInput(false)]//ОПТИМИЗИРОВАТЬ
+        public async Task<ViewResult> SendMsg()
         {
             try
             {
-                if (Regex.IsMatch(Request.Form["linkVK"].ToString(), @"^(https?:\/\/)?(www\.)?vk\.com\/(\w|\d)+?\/?$"))//если ссыфлка вк валидна
-                {
-                    if (Regex.IsMatch(Request.Form["subject"].ToString(), @"^[а-яА-ЯёЁa-zA-Z0-9]+$"))//валидация subject
+                string code = Request.Form["captcha"];
+                if (code != String.Empty && code == Session["code"].ToString())
+                {//если каптчка введена верно
+                    if (Regex.IsMatch(Request.Form["linkVK"].ToString(), @"^(https?:\/\/)?(www\.)?vk\.com\/(\w|\d)+?\/?$"))//если ссыфлка вк валидна
                     {
-                        if (Regex.IsMatch(Request.Form["requirements"].ToString(), @"^[a-zA-ZА-Яа-яЁё0-9\s]+$"))//валидация требований заказа
+                        if (Regex.IsMatch(Request.Form["subject"].ToString(), @"^[а-яА-ЯёЁa-zA-Z0-9]+$"))//валидация subject
                         {
-                            string subject = Request.Form["subject"];
-                            string email = Request.Cookies["User"].Value;
-                            string requirements = Request.Form["requirements"];
-                            string time = Request.Form["time"];
-                            string linkVK = Request.Form["linkVK"];
-                            int ID_NameOrder = 0;
-
-                            siteDb.Name_Order.Load();
-                            if (siteDb.Name_Order.Count() == 0 || siteDb.Name_Order.FirstOrDefault(x => x.Name == subject) == null)//если предмета с данным названием нет в базе
+                            if (Regex.IsMatch(Request.Form["requirements"].ToString(), @"^[a-zA-ZА-Яа-яЁё0-9\s]+$"))//валидация требований заказа
                             {
-                                siteDb.Name_Order.Add(new Name_Order
+                                string subject = Request.Form["subject"];
+                                string email = Request.Cookies["User"].Value;
+                                string requirements = Request.Form["requirements"];
+                                string time = Request.Form["time"];
+                                string linkVK = Request.Form["linkVK"];
+                                int ID_NameOrder = 0;
+
+                                siteDb.Name_Order.Load();
+                                if (siteDb.Name_Order.Count() == 0 || siteDb.Name_Order.FirstOrDefault(x => x.Name == subject) == null)//если предмета с данным названием нет в базе
                                 {
-                                    Name = subject
+                                    siteDb.Name_Order.Add(new Name_Order
+                                    {
+                                        Name = subject
+                                    });
+                                    ID_NameOrder = siteDb.Name_Order.Local[siteDb.Name_Order.Local.Count - 1].Id + 1;
+                                }
+                                else ID_NameOrder = siteDb.Name_Order.First(x => x.Name == subject).Id;
+
+                                siteDb.Orders.Load();
+                                siteDb.Users.Load();
+                                siteDb.Orders.Add(new Orders
+                                {
+                                    ID_Name = ID_NameOrder,
+                                    ID_User = siteDb.Users.First(x => x.Email == email).Id,
+                                    About_Order = requirements + ". Ссылка на страницу в ВК: " + linkVK,
+                                    Workman = "Nobody",
+                                    Salary_full = 999999,
+                                    Salary_workman = 99999,
+                                    Status = "Неактивен",
+                                    Time = time
                                 });
+                                siteDb.SaveChanges();
+
+                                EmailService emailService = new EmailService();
+                                await emailService.SendEmailAsync("itlearning2020@gmail.com", "Новый заказ на сайте it-learning", "На сайте появился новыый заказ<br/>" +
+                                    "Перейдите по <a href = \"http://it-learning.somee.com/Order/ListOrder\">ссылке</a> чтобы узнать о заказе больше");
+
+                                ViewBag.Msg = "Заказ успешно оформлен. Вам в скором времени отпишут либо на странциу в ВК, либо на вашу почту, указанную при регистрации";
+                                return View("Thanks");
                             }
-                            ID_NameOrder = siteDb.Name_Order.First(x => x.Name == subject).Id;
-
-                            siteDb.Orders.Load();
-                            siteDb.Users.Load();
-                            siteDb.Orders.Add(new Orders
+                            else
                             {
-                                ID_Name = ID_NameOrder,
-                                ID_User = siteDb.Users.First(x => x.Email == email).Id,
-                                About_Order = requirements + ". Ссылка на страницу в ВК: " + linkVK,
-                                Workman = "Nobody",
-                                Salary_full = 999999,
-                                Salary_workman = 99999,
-                                Status = "Неактивен",
-                                Time = time
-                            });
-                            siteDb.SaveChanges();
-
-                            ViewBag.Msg = "Заказ успешно оформлен. Вам в скором времени отпишут либо на странциу в ВК, либо на вашу почту, указанную при регистрации";
-                            return View("Thanks");
+                                throw new Exception("Поле \"Требования к заказу\" должно содержать только цифры/буквы и некоторые символы");
+                            }
                         }
                         else
                         {
-                            throw new Exception("Поле \"Требования к заказу\" должно содержать только цифры/буквы и некоторые символы");
+                            throw new Exception("Неверный формат subject");
                         }
                     }
                     else
                     {
-                        throw new Exception("Неверный формат subject");
+                        throw new Exception("Неверный формат ссылки VK");
                     }
                 }
                 else
                 {
-                    throw new Exception("Неверный формат ссылки VK");
+                    throw new Exception("Код с картинки введён неверно");
                 }
             }
             catch (Exception exc)
@@ -88,122 +101,81 @@ namespace MySite.Controllers
                 ViewBag.Msg = exc.Message;
                 return View("Create");
             }
-            /*
-                try
-                {
-                    
-                    //запоминаем все данные введенные администартором
-                    string[] answerChoice = Request.Form["AnswerChoice"].Split(',');
-                    string question = Request.Form["quest"];
-                    string TrueAnswer = Request.Form["trueAnswer"];
-
-                    //загружаем данные из бд
-                    siteDb.Questions.Load();
-                    siteDb.Answer_Choice.Load();
-
-                    //добавляем новый вопрос
-                    siteDb.Questions.Add(new Questions
-                    {
-                        ID_NameTest = id,
-                        question = question,
-                        TrueAnswer = int.Parse(TrueAnswer.Split(' ')[0])
-                    });
-
-                    //сохраняем изменения
-                    siteDb.SaveChanges();//ошибка
-
-                    int[] Id = (from item in siteDb.Questions.Local
-                                where item != null
-                                select item.Id).ToArray();
-
-                    //добавляем варианты ответа для вопроса
-                    foreach (string answer in answerChoice)
-                    {
-                        siteDb.Answer_Choice.Add(new Answer_Choice
-                        {
-                            answer = answer,
-                            ID_Question = Id.Max()//возвращаем последний id вопроса
-                        });
-                    }
-
-                    //сохраняем изменения
-                    siteDb.SaveChanges();
-                }
-                catch (Exception exc)
-                {
-                    HttpCookie cookie = new HttpCookie("ERROR");//в качестве cooki запоминаем сообщение об ошибке
-                    cookie.Expires = DateTime.Now.AddDays(1);
-                    cookie.Value = exc.Message;
-                    Response.Cookies.Add(cookie);
-
-                    return RedirectPermanent("~/Error/Forbidden/");
-                }
-            return RedirectPermanent("~/Test/EditTest/" + id);*/
         }
-        
-        
-        public ViewResult ListOrder()
+
+        //ОПТИМИЗИРОВАТЬ
+        public ActionResult ListOrder()
         {
             string html = string.Empty;
-            string email = Request.Cookies["User"].Value;
             try
             {
-                siteDb.Orders.Load();
-                siteDb.Name_Order.Load();
-                siteDb.Users.Load();
-                if (email == "admin@mail.ru")//если пользователь  админ
+                if(Request.Cookies["user"] != null && Request.Cookies["__sc1_592658302759876"] != null)
                 {
-                    foreach (Orders orders in siteDb.Orders.Local)//пробегаемяспо всем заказам
+                    
+                    string email = Request.Cookies["User"].Value;
+                    string token = Request.Cookies["__sc1_592658302759876"].Value;
+                    siteDb.Orders.Load();
+                    siteDb.Name_Order.Load();
+                    siteDb.Users.Load();
+                    if (email == "admin@mail.ru" && VerificationService.isAdmin(token))//если пользователь  админ
                     {
-                        html += "" +
-                            "<tr>" +
-                                "<td>" + orders.Id + "</td>" +
-                                "<td>" + siteDb.Name_Order.First(x => x.Id == orders.ID_Name).Name + "</td>" +
-                                "<td>" + orders.Salary_full + "</td>" +
-                                "<td>" + orders.Salary_workman + "</td>" +
-                                "<td>" + siteDb.Users.First(x => x.Id == orders.ID_User).Email + "</td>" +
-                                "<td>" + orders.Workman + "</td>" +
-                                "<td>" + orders.Time + "</td>" +
-                                "<td>" + orders.Status + "</td>" +
-                                "<td>" +
-                                    "<a href=\"/Order/AppointOrder/" + orders.Id + "\"class = \"btn btn-success\">Изменить данные</a>" +
-                                    "<br/>" +
-                                    "<a href=\"/Order/InfoOrder/" + orders.Id + "\"class = \"btn btn-info\">Подробнее</a>" +
-                                    "<br/>" +
-                                    "<a href=\"/Order/CLoseOrder/" + orders.Id + "\"class = \"btn btn-danger\">Закрыть заказ</a>" +
-                                    "<br/>" +
-                                "</td>" +
-                            "</tr>";
+                        foreach (Orders orders in siteDb.Orders.Local)//пробегаемяспо всем заказам
+                        {
+                            html += "" +
+                                "<tr>" +
+                                    "<td>" + orders.Id + "</td>" +
+                                    "<td>" + siteDb.Name_Order.First(x => x.Id == orders.ID_Name).Name + "</td>" +
+                                    "<td>" + orders.Salary_full + "</td>" +
+                                    "<td>" + orders.Salary_workman + "</td>" +
+                                    "<td>" + siteDb.Users.First(x => x.Id == orders.ID_User).Email + "</td>" +
+                                    "<td>" + orders.Workman + "</td>" +
+                                    "<td>" + orders.Time + "</td>" +
+                                    "<td>" + orders.Status + "</td>" +
+                                    "<td>" +
+                                        "<a href=\"/Order/AppointOrder/" + orders.Id + "\"class = \"btn btn-success\">Изменить данные</a>" +
+                                        "<br/>" +
+                                        "<a href=\"/Order/InfoOrder/" + orders.Id + "\"class = \"btn btn-info\">Подробнее</a>" +
+                                        "<br/>" +
+                                        "<a href=\"/Order/CLoseOrder/" + orders.Id + "\"class = \"btn btn-danger\">Закрыть заказ</a>" +
+                                        "<br/>" +
+                                    "</td>" +
+                                "</tr>";
+                        }
+                    }
+                    else
+                    {//если пользователь - рабочий
+                        foreach (Orders orders in siteDb.Orders.Local)//пробегаемяспо всем заказам
+                        {
+                            html += "" +
+                                "<tr>" +
+                                    "<td>" + orders.Id + "</td>" +
+                                    "<td>" + siteDb.Name_Order.First(x => x.Id == orders.ID_Name).Name + "</td>" +
+                                    "<td>Secret</td>" +
+                                    "<td>" + orders.Salary_workman + "</td>" +
+                                    "<td>Secret</td>" +
+                                    "<td>" + orders.Workman + "</td>" +
+                                    "<td>" + orders.Time + "</td>" +
+                                    "<td>" + orders.Status + "</td>" +
+                                    "<td>" +
+                                        "<a href=\"/Order/TakeTheOrder/" + orders.Id + "\"class = \"btn btn-success\">Взяться за заказ</a>" +
+                                        "<br/>" +
+                                        "<a href=\"/Order/InfoOrder/" + orders.Id + "\"class = \"btn btn-info\">Подробнее</a>" +
+                                        "<br/>" +
+                                    "</td>" +
+                                "</tr>";
+                        }
                     }
                 }
                 else
-                {//если пользователь - рабочий
-                    foreach (Orders orders in siteDb.Orders.Local)//пробегаемяспо всем заказам
-                    {
-                        html += "" +
-                            "<tr>" +
-                                "<td>" + orders.Id + "</td>" +
-                                "<td>" + siteDb.Name_Order.First(x => x.Id == orders.ID_Name).Name + "</td>" +
-                                "<td>Secret</td>" +
-                                "<td>" + orders.Salary_workman + "</td>" +
-                                "<td>Secret</td>" +
-                                "<td>" + orders.Workman + "</td>" +
-                                "<td>" + orders.Time + "</td>" +
-                                "<td>" + orders.Status + "</td>" +
-                                "<td>" +
-                                    "<a href=\"/Order/TakeTheOrder/" + orders.Id + "\"class = \"btn btn-success\">Взяться за заказ</a>" +
-                                    "<br/>" +
-                                    "<a href=\"/Order/InfoOrder/" + orders.Id + "\"class = \"btn btn-info\">Подробнее</a>" +
-                                    "<br/>" +
-                                "</td>" +
-                            "</tr>";
-                    }
+                {
+                    throw new Exception("Информация о заказах доступно только авторизованным пользевателям");
                 }
+                
             }
             catch (Exception exc)
             {
                 ViewBag.Msg = exc.Message;
-                return View();
+                return RedirectPermanent("~/Shared/_LayoutError");
             }
             ViewBag.html = html;
             return View();
@@ -215,18 +187,26 @@ namespace MySite.Controllers
             Orders orders = null;
             try
             {
-                siteDb.Orders.Load();
-                orders = siteDb.Orders.First(x => x.Id == ID);
+                if (Request.Cookies["user"] != null && Request.Cookies["__sc1_592658302759876"] != null)
+                {
+                    siteDb.Orders.Load();
+                    orders = siteDb.Orders.First(x => x.Id == ID);
+                }
+                else
+                {
+                    throw new Exception("");
+                }
             }catch(Exception exc)
             {
                 ViewBag.Msg = exc.Message;
+                return RedirectPermanent("~/Shared/_LayoutError");
             }
             return View(orders);
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]//ОПТИМИЗИРОВАТЬ
         public async Task<ActionResult> TakeTheOrder()
         {
             string ID_Order = Request.Form["Id"];
@@ -257,27 +237,58 @@ namespace MySite.Controllers
 
         public ActionResult CLoseOrder(int ID)
         {
-            siteDb.Orders.Load();
-            siteDb.Orders.Remove(siteDb.Orders.First(x => x.Id == ID));
-            siteDb.SaveChanges();
+            try
+            {
+                if (Request.Cookies["user"] != null && Request.Cookies["__sc1_592658302759876"] != null)
+                {
+                    siteDb.Orders.Load();
+                    siteDb.Orders.Remove(siteDb.Orders.First(x => x.Id == ID));
+                    siteDb.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("");
+                }
+            }
+            catch (Exception exc)
+            {
+                ViewBag.Msg = exc.Message;
+                return RedirectPermanent("~/Shared/_LayoutError");
+            }
             return View("ListOrder");
         }
 
         [HttpGet]
         public ActionResult InfoOrder(int ID)//возвращает информацию о заказе
         {
-            siteDb.Orders.Load();
-            string info = siteDb.Orders.First(x => x.Id == ID).About_Order;
-            string email = Request.Cookies["User"].Value;
-            if(email != "admin@mail.ru" && siteDb.Orders.First(x => x.Id == ID).Workman != email)//если пользователь не имеет отношения к заказу
+            try
             {
-                int index = info.IndexOf("Ссылка на страницу в ВК");
-                if(index != -1)
+                if (Request.Cookies["user"] != null && Request.Cookies["__sc1_592658302759876"] != null)
                 {
-                    info = info.Remove(info.IndexOf("Ссылка на страницу в ВК"));
+                    siteDb.Orders.Load();
+                    string info = siteDb.Orders.First(x => x.Id == ID).About_Order;
+                    string email = Request.Cookies["User"].Value;
+                    string token = Request.Cookies["__sc1_592658302759876"].Value;
+                    if( (email != "admin@mail.ru" && siteDb.Orders.First(x => x.Id == ID).Workman != email) || (email == "admin@mail.ru" && (!VerificationService.isAdmin(token))) )//если пользователь не имеет отношения к заказу
+                    {
+                        int index = info.IndexOf("Ссылка на страницу в ВК");
+                        if(index != -1)
+                        {
+                            info = info.Remove(info.IndexOf("Ссылка на страницу в ВК"));
+                        }
+                    }
+                    ViewBag.Info = info;
+                }
+                else
+                {
+                    throw new Exception("");
                 }
             }
-            ViewBag.Info = info;
+            catch (Exception exc)
+            {
+                ViewBag.Msg = exc.Message;
+                return RedirectPermanent("~/Shared/_LayoutError");
+            }
             return View();
         }
 
@@ -287,19 +298,27 @@ namespace MySite.Controllers
             Orders orders = null;
             try
             {
-                siteDb.Orders.Load();
-                orders = siteDb.Orders.First(x => x.Id == ID);
+                if (Request.Cookies["user"] != null && Request.Cookies["__sc1_592658302759876"] != null)
+                {
+                    siteDb.Orders.Load();
+                    orders = siteDb.Orders.First(x => x.Id == ID);
+                }
+                else
+                {
+                    throw new Exception("");
+                }
             }
             catch (Exception exc)
             {
                 ViewBag.Msg = exc.Message;
+                return RedirectPermanent("~/Shared/_LayoutError");
             }
             return View(orders);
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]//ОПТИМИЗИРОВАТЬ
         public async Task<ActionResult> AppointOrder(Orders orders)
         {
             string info = orders.About_Order;
@@ -319,7 +338,7 @@ namespace MySite.Controllers
                     "<br/>\'Ваша ЗП за выполненный заказ: " + orders.Salary_workman + "\'" +
                     "<br/>\'Ваш email: " + orders.Workman + "\'" +
                     "<br/>\'" + info + "\'" +
-                    "<br/> Если этой информации было вам недостаточно, то вы всегда можете посетить страницу <a href = \"http://localhost:4490/Order/ListOrder\">список заказов</a> и узнать подробности заказа." +
+                    "<br/> Если этой информации было вам недостаточно, то вы всегда можете посетить страницу <a href = \"http://it-learning.somee.com/Order/ListOrder\">список заказов</a> и узнать подробности заказа." +
                     "или же вы можете написать нам на почту itlearning2020@gmail.com . " +
                     "<br/><b>Обязательно</b> после выполнения заказа - сообщить об этом админисрацию ! При невыполнении условий договорра - ваше взаимодействие с нами будет прекращено навсегда.");
 

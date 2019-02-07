@@ -212,6 +212,10 @@
       <DependentUpon>ExchangeRate.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WebService\VerificationService.asmx.cs">
+      <DependentUpon>VerificationService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -255,6 +259,7 @@
     <Content Include="Scripts\Test\EditTest\Add_or_Remve_Test.js" />
     <Content Include="WebService\EmailService.asmx" />
     <Content Include="WebService\ExchangeRate.asmx" />
+    <Content Include="WebService\VerificationService.asmx" />
     <EntityDeploy Include="Models\SiteDb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SiteDb.Designer.cs</LastGenOutput>

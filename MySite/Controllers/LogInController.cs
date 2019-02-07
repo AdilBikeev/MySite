@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MySite.Models;
 using MySite.CipherData;
 using System.Data.Entity;
+using MySite.WebService;
 using System.ComponentModel.DataAnnotations;
 
 namespace MySite.Controllers
@@ -16,7 +17,12 @@ namespace MySite.Controllers
         [HttpGet]
         public ActionResult Autorization()//при первом вызове страницы
         {
-            return View();
+            if (Request.Cookies["User"] == null && Request.Cookies["__sc1_592658302759876"] == null)
+            {
+                RedirectPermanent("~/Error/NotFound");
+            }
+            return View(); 
+                
         }
 
         [HttpPost]
@@ -34,10 +40,20 @@ namespace MySite.Controllers
                         if (item.Password == Cipher.GetMD5Hach(user.Password) && item.Login == Cipher.GetMD5Hach(user.Login))//расшифровываем даныне из БД и сверяем данные с веденными пользоватеем
                         {
                             ViewBag.Msg = "";
-                            HttpCookie cookie = new HttpCookie("User");//в качестве cooki запоминаем эмаил пользователя
+
+                            HttpCookie cookie = new HttpCookie("User");//в качестве cookie запоминаем эмаил пользователя
                             cookie.Expires = DateTime.Now.AddDays(31);
-                            cookie.Value = item.Email;//сохраняем в куки уже зашифрованный email
+
+                            HttpCookie cookieSC = new HttpCookie("__sc1_592658302759876");//в качестве cookie запоминаем эмаил пользователя
+                            cookieSC.Expires = DateTime.Now.AddDays(31);
+
+                            cookie.Value = item.Email;
+                            if(item.Email == "admin@mail.ru") cookieSC.Value = VerificationService.GetTokenForAdmin();//если авторизовался админ
+                            else cookieSC.Value = VerificationService.GetToken();//если авторизовался обычный пользователь
+
                             Response.Cookies.Add(cookie);
+                            Response.Cookies.Add(cookieSC);
+
                             return RedirectToAction("Index", "Home");//возвращаемся к домашней странцие
                         }
                     }

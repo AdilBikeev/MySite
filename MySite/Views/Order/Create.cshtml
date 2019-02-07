@@ -16,7 +16,7 @@
             <td>
                 <input name="linkVK" type="text" style="width:500px">
             </td>
-            
+
         </tr>
         <tr>
             <td>Название предмета</td>
@@ -30,13 +30,26 @@
                 <input name="time" type="text" style="width:500px" placeholder="Формат: 'день-месяц'">
             </td>
         </tr>
-        
         <tr>
             <td colspan="3">
                 <textarea name="requirements" placeholder="Требования к заказу" style="width:500px"></textarea>
             </td>
             <td></td>
             <td></td>
+        </tr>
+        <tr>
+            <td>
+                <br />
+                Введите код с картинки &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src='@Url.Action("Captcha", "Home")' alt='captcha' />
+                <br />
+                <input id="captcha" name="captcha" type="text" />
+                <br />
+            </td>
         </tr>
         <tr>
             <td>
