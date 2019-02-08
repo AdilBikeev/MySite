@@ -103,7 +103,7 @@ namespace MySite.Controllers
             }
         }
 
-        //ОПТИМИЗИРОВАТЬ
+        [HttpGet]//ОПТИМИЗИРОВАТЬ
         public ActionResult ListOrder()
         {
             string html = string.Empty;
@@ -170,13 +170,13 @@ namespace MySite.Controllers
                 {
                     throw new Exception("Информация о заказах доступно только авторизованным пользевателям");
                 }
-                
             }
             catch (Exception exc)
             {
                 ViewBag.Msg = exc.Message;
                 return RedirectPermanent("~/Shared/_LayoutError");
             }
+            
             ViewBag.html = html;
             return View();
         }

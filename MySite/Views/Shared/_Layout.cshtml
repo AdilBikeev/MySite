@@ -29,28 +29,21 @@
                         if (user != null && Request.Cookies["__sc1_592658302759876"] != null)
                         {//в случаи, если пользователь на странице уже авторизован
                          //ссылка на странциу профиля авторизованного пользователя
-                                    if (user.Value != "AdilAdminBikeev1999h@mail.ru")
-                                    {
                             <label style="float:right">
-                                @Html.ActionLink("Список заказов", "ListOrder", "Order", null, new { @class = "btn btn-danger btn-lg" })
+                                @Html.ActionLink("Список заказов", "ListOrder", "Order", null, new { @class = "btn btn-success btn-lg" })
                             </label>
                             <label style="float:right">
                                 @Html.ActionLink("Мой профиль", "Home", "Profile", null, new { @class = "btn btn-primary btn-lg" })
                             </label>
-                            <label class="navbar-brand" style="float:right">@user.Value</label>
-                        }
-                        else
-                        {
                             <label style="float:right">
                                 @Html.ActionLink("Выйти", "Exit", "Profile", null, new { @class = "btn btn-danger btn-lg" })
                             </label>
-                            <label class="navbar-brand" style="float:right">Редактор тестов</label>
+                            <label class="navbar-brand" style="float:right">@user.Value</label>
                         }
-                    }
-                    else
-                    {//если пользователь не авторизован
-                        @Html.ActionLink("Войти", "Autorization", "LogIn", null, new { @class = "btn btn-primary btn-lg" })
-                    }
+                        else
+                        {//если пользователь не авторизован
+                            @Html.ActionLink("Войти", "Autorization", "LogIn", null, new { @class = "btn btn-primary btn-lg" })
+                        }
                 }
             </div>
         </div>

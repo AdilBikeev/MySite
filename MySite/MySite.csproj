@@ -308,11 +308,11 @@
     <Content Include="Views\Error\ServerError.cshtml" />
     <Content Include="Views\Order\Create.cshtml" />
     <Content Include="Views\Order\Thanks.cshtml" />
-    <Content Include="Views\Order\ListOrder.cshtml" />
     <Content Include="Views\Order\AppointOrder.cshtml" />
     <Content Include="Views\Order\InfoOrder.cshtml" />
     <Content Include="Views\Order\CLoseOrder.cshtml" />
     <Content Include="Views\Order\TakeTheOrder.cshtml" />
+    <Content Include="Views\Order\ListOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
