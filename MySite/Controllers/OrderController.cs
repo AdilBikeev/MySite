@@ -104,7 +104,7 @@ namespace MySite.Controllers
         }
 
         [HttpGet]//ОПТИМИЗИРОВАТЬ
-        public ActionResult ListOrder()
+        public ActionResult GetListOrders()
         {
             string html = string.Empty;
             try

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ListOrder";
+    ViewBag.Title = "Список заказов";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,9 +15,9 @@
 }
 
 @section table{
-    <div class="col‐xs‐12 col‐md‐8">
+    <div class="col?xs?12 col?md?8">
         <div class="fresh-table toolbar-color-blue left">
-            
+
             @if (ViewBag.Msg == "Произошла ошибка базового поставщика в Open.")
             {
                 <h4>Ошибка при загрузке данных с сервера - перезапустите страницу</h4>
@@ -51,7 +51,7 @@
     </div>
 }
 
-<script>
+<script type="text/javascript" src="~/Scripts/Order/GetListOrders/table.js">
         var $table = $('#fresh-table'),
             full_screen = false;
 
@@ -84,7 +84,6 @@
             $(window).resize(function () {
                 $table.bootstrapTable('resetView');
             });
-
         });
 </script>
 

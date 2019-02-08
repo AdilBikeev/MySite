@@ -256,7 +256,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Test\EditTest\Add_or_Remve_Test.js" />
+    <Content Include="Scripts\Order\GetListOrders\table.js" />
     <Content Include="WebService\EmailService.asmx" />
     <Content Include="WebService\ExchangeRate.asmx" />
     <Content Include="WebService\VerificationService.asmx" />
@@ -312,7 +312,7 @@
     <Content Include="Views\Order\InfoOrder.cshtml" />
     <Content Include="Views\Order\CLoseOrder.cshtml" />
     <Content Include="Views\Order\TakeTheOrder.cshtml" />
-    <Content Include="Views\Order\ListOrder.cshtml" />
+    <Content Include="Views\Order\GetListOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

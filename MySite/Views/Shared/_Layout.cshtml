@@ -30,7 +30,7 @@
                         {//в случаи, если пользователь на странице уже авторизован
                          //ссылка на странциу профиля авторизованного пользователя
                             <label style="float:right">
-                                @Html.ActionLink("Список заказов", "ListOrder", "Order", null, new { @class = "btn btn-success btn-lg" })
+                                @Html.ActionLink("Список заказов", "GetListOrders", "Order", null, new { @class = "btn btn-success btn-lg" })
                             </label>
                             <label style="float:right">
                                 @Html.ActionLink("Мой профиль", "Home", "Profile", null, new { @class = "btn btn-primary btn-lg" })
