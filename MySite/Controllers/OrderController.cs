@@ -104,7 +104,7 @@ namespace MySite.Controllers
         }
 
         [HttpGet]//ОПТИМИЗИРОВАТЬ
-        public ActionResult GetListOrders()
+        public ViewResult GetListOrders()
         {
             string html = string.Empty;
             try
@@ -117,54 +117,68 @@ namespace MySite.Controllers
                     siteDb.Orders.Load();
                     siteDb.Name_Order.Load();
                     siteDb.Users.Load();
-                    if (email == "admin@mail.ru" && VerificationService.isAdmin(token))//если пользователь  админ
+                    if (siteDb.Orders.Local.Count != 0)
                     {
-                        foreach (Orders orders in siteDb.Orders.Local)//пробегаемяспо всем заказам
+                        List<Orders> ordersList = siteDb.Orders.Local.ToList();
+                        if (email == "admin@mail.ru" && VerificationService.isAdmin(token))//если пользователь  админ
                         {
-                            html += "" +
-                                "<tr>" +
-                                    "<td>" + orders.Id + "</td>" +
-                                    "<td>" + siteDb.Name_Order.First(x => x.Id == orders.ID_Name).Name + "</td>" +
-                                    "<td>" + orders.Salary_full + "</td>" +
-                                    "<td>" + orders.Salary_workman + "</td>" +
-                                    "<td>" + siteDb.Users.First(x => x.Id == orders.ID_User).Email + "</td>" +
-                                    "<td>" + orders.Workman + "</td>" +
-                                    "<td>" + orders.Time + "</td>" +
-                                    "<td>" + orders.Status + "</td>" +
-                                    "<td>" +
-                                        "<a href=\"/Order/AppointOrder/" + orders.Id + "\"class = \"btn btn-success\">Изменить данные</a>" +
-                                        "<br/>" +
-                                        "<a href=\"/Order/InfoOrder/" + orders.Id + "\"class = \"btn btn-info\">Подробнее</a>" +
-                                        "<br/>" +
-                                        "<a href=\"/Order/CLoseOrder/" + orders.Id + "\"class = \"btn btn-danger\">Закрыть заказ</a>" +
-                                        "<br/>" +
-                                    "</td>" +
-                                "</tr>";
+                                foreach (Orders orders in ordersList)//пробегаемяспо всем заказам
+                                {
+                                    html += "" +
+                                        "<tr>" +
+                                            "<td>" + orders.Id + "</td>" +
+                                            "<td>" + siteDb.Name_Order.First(x => x.Id == orders.ID_Name).Name + "</td>" +
+                                            "<td>" + orders.Salary_full + "</td>" +
+                                            "<td>" + orders.Salary_workman + "</td>";
+                                if (siteDb.Users.FirstOrDefault(x => x.Id == orders.ID_User) != null)
+                                {
+                                    html += "<td>" + siteDb.Users.First(x => x.Id == orders.ID_User).Email + "</td>";
+                                }
+                                else
+                                {
+                                    html += "<td>Пользователь удалил аккаунт</td>";
+                                }
+                                    html += "" +
+                                            "<td>" + orders.Workman + "</td>" +
+                                            "<td>" + orders.Time + "</td>" +
+                                            "<td>" + orders.Status + "</td>" +
+                                            "<td>" +
+                                                "<a href=\"/Order/AppointOrder/" + orders.Id + "\"class = \"btn btn-success\">Изменить данные</a>" +
+                                                "<br/>" +
+                                                "<a href=\"/Order/InfoOrder/" + orders.Id + "\"class = \"btn btn-info\">Подробнее</a>" +
+                                                "<br/>" +
+                                                "<a href=\"/Order/CLoseOrder/" + orders.Id + "\"class = \"btn btn-danger\">Закрыть заказ</a>" +
+                                                "<br/>" +
+                                            "</td>" +
+                                        "</tr>";
+                                }
                         }
-                    }
-                    else
-                    {//если пользователь - рабочий
-                        foreach (Orders orders in siteDb.Orders.Local)//пробегаемяспо всем заказам
-                        {
-                            html += "" +
-                                "<tr>" +
-                                    "<td>" + orders.Id + "</td>" +
-                                    "<td>" + siteDb.Name_Order.First(x => x.Id == orders.ID_Name).Name + "</td>" +
-                                    "<td>Secret</td>" +
-                                    "<td>" + orders.Salary_workman + "</td>" +
-                                    "<td>Secret</td>" +
-                                    "<td>" + orders.Workman + "</td>" +
-                                    "<td>" + orders.Time + "</td>" +
-                                    "<td>" + orders.Status + "</td>" +
-                                    "<td>" +
-                                        "<a href=\"/Order/TakeTheOrder/" + orders.Id + "\"class = \"btn btn-success\">Взяться за заказ</a>" +
-                                        "<br/>" +
-                                        "<a href=\"/Order/InfoOrder/" + orders.Id + "\"class = \"btn btn-info\">Подробнее</a>" +
-                                        "<br/>" +
-                                    "</td>" +
-                                "</tr>";
+                        else
+                        {//если пользователь - рабочий
+                            foreach (Orders orders in ordersList)//пробегаемяспо всем заказам
+                            {
+                                html += "" +
+                                    "<tr>" +
+                                        "<td>" + orders.Id + "</td>" +
+                                        "<td>" + siteDb.Name_Order.First(x => x.Id == orders.ID_Name).Name + "</td>" +
+                                        "<td>Secret</td>" +
+                                        "<td>" + orders.Salary_workman + "</td>" +
+                                        "<td>Secret</td>" +
+                                        "<td>" + orders.Workman + "</td>" +
+                                        "<td>" + orders.Time + "</td>" +
+                                        "<td>" + orders.Status + "</td>" +
+                                        "<td>" +
+                                            "<a href=\"/Order/TakeTheOrder/" + orders.Id + "\"class = \"btn btn-success\">Взяться за заказ</a>" +
+                                            "<br/>" +
+                                            "<a href=\"/Order/InfoOrder/" + orders.Id + "\"class = \"btn btn-info\">Подробнее</a>" +
+                                            "<br/>" +
+                                        "</td>" +
+                                    "</tr>";
+                            }
                         }
+
                     }
+                    else throw new Exception("Извините, но заказов ещё нет");
                 }
                 else
                 {
@@ -174,7 +188,6 @@ namespace MySite.Controllers
             catch (Exception exc)
             {
                 ViewBag.Msg = exc.Message;
-                return RedirectPermanent("~/Shared/_LayoutError");
             }
             
             ViewBag.html = html;

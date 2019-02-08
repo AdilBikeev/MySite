@@ -61,7 +61,7 @@ namespace MySite.Controllers
             catch (Exception exc)
             {
                 ViewBag.Msg = exc.Message;
-                return View("Error");
+                return View("NotFound");
             }
         }
 
