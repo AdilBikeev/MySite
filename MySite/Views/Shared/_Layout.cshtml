@@ -20,7 +20,6 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        @Html.ActionLink("О портале", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     </li>
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                 </ul>
@@ -60,57 +59,6 @@
         <div class="col-sm-6">
             @RenderBody()
         </div>
-        @*
-        <!--Правый div-->
-        <div class="col-sm-3">
-            @using MySite.WebService
-            <!--Вызываем метод для получения курса валют-->
-            @ExchangeRate.GetCurs()
-            <div class="br-curs">
-                <div class="back-curs">
-                    <ul class="menu-top">
-                        <li>
-                            <b>&nbsp;&nbsp;Курс валют</b>
-                        </li>
-                    </ul>
-                </div>
-                <hr />
-                <div class="back-curs">
-                    <ul class="menu-top">
-                        <li>
-                            <picture>
-                                <img src="~/Content/Images/Shared/_Layout/USD.png" style="height:30px; width:30px">
-                            </picture>
-                        </li>
-                        <li>
-                            <b>@ExchangeRate.usdValue</b>
-                        </li>
-                    </ul>
-                </div>
-                <div class="back-curs">
-                    <ul class="menu-top">
-                        <li>
-                            <picture>
-                                <img src="~/Content/Images/Shared/_Layout/EUR.png" style="height:30px; width:30px">
-                            </picture>
-                        </li>
-                        <li>
-                            <b>@ExchangeRate.euroValue</b>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-
-
-            <br />
-            <br />
-            <br />
-            <br />
-
-            <!--Баннер для рекламы-->
-            <img width="200" height="400" alt="Advertisement" src="http://rf24.org/nov2/schoolm/images/_index_78f2db9d077f4e7141711e6d9455ab43_4012_.jpg" border="0">
-        </div>*@
     </div>
     <div class="container body-content">
         <hr />
@@ -121,13 +69,6 @@
                     <a href="https://vk.com/goncharivskyy">
                         <picture>
                             <img src="http://posledneeslovo.ru/wp-content/uploads/2012/08/vkontakte.jpg" style="height:30px; width:30px">
-                        </picture>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/AdilBikeev?tab=repositories">
-                        <picture>
-                            <img src="https://cangelozzi.github.io/My-Portfolio/images/GitHub.png" style="height:30px; width:30px">
                         </picture>
                     </a>
                 </li>

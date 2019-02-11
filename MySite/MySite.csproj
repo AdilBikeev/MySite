@@ -296,7 +296,6 @@
     <Content Include="Views\Shared\_LayoutError.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Home\Thanks.cshtml" />
     <Content Include="Views\LogIn\Autorization.cshtml" />

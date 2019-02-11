@@ -18,12 +18,7 @@ namespace MySite.Controllers
         {
             return View();
         }
-
-        public ActionResult About()//Возращается страница содержащая информацию о приложении
-        {
-            return View();
-        }
-
+        
         public ActionResult Captcha()//Создает капчу, для проверки на робота
         {
             string code = new Random(DateTime.Now.Millisecond).Next(1111, 9999).ToString();

@@ -130,14 +130,14 @@ namespace MySite.Controllers
                                             "<td>" + siteDb.Name_Order.First(x => x.Id == orders.ID_Name).Name + "</td>" +
                                             "<td>" + orders.Salary_full + "</td>" +
                                             "<td>" + orders.Salary_workman + "</td>";
-                                if (siteDb.Users.FirstOrDefault(x => x.Id == orders.ID_User) != null)
-                                {
-                                    html += "<td>" + siteDb.Users.First(x => x.Id == orders.ID_User).Email + "</td>";
-                                }
-                                else
-                                {
-                                    html += "<td>Пользователь удалил аккаунт</td>";
-                                }
+                                    if (siteDb.Users.FirstOrDefault(x => x.Id == orders.ID_User) != null)
+                                    {
+                                        html += "<td>" + siteDb.Users.First(x => x.Id == orders.ID_User).Email + "</td>";
+                                    }
+                                    else
+                                    {
+                                        html += "<td>Пользователь удалил аккаунт</td>";
+                                    }
                                     html += "" +
                                             "<td>" + orders.Workman + "</td>" +
                                             "<td>" + orders.Time + "</td>" +
@@ -162,8 +162,16 @@ namespace MySite.Controllers
                                         "<td>" + orders.Id + "</td>" +
                                         "<td>" + siteDb.Name_Order.First(x => x.Id == orders.ID_Name).Name + "</td>" +
                                         "<td>Secret</td>" +
-                                        "<td>" + orders.Salary_workman + "</td>" +
-                                        "<td>Secret</td>" +
+                                        "<td>" + orders.Salary_workman + "</td>";
+                                if (email == siteDb.Users.First(x => x.Id == orders.ID_User).Email)
+                                {
+                                    html += "<td>" + email + "</td>";
+                                }
+                                else
+                                {
+                                    html += "<td>Secret</td>";
+                                }
+                                html += "" +
                                         "<td>" + orders.Workman + "</td>" +
                                         "<td>" + orders.Time + "</td>" +
                                         "<td>" + orders.Status + "</td>" +

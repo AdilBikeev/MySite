@@ -18,7 +18,8 @@ namespace MySite.Models
         public int Id { get; set; }
         public int ID_Name { get; set; }
         public int ID_User { get; set; }
-        
+
+        [RegularExpression(@"^[a-zA-ZА-Яа-яЁё0-9\s]+$", ErrorMessage = "*Поле \'Требования к заказу\' может содержать только буквы/цифры/некоторые символы")]
         public string About_Order { get; set; }
         public string Workman { get; set; }
         public Nullable<int> Salary_full { get; set; }
